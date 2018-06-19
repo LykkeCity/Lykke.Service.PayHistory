@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using Lykke.Sdk;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.PlatformAbstractions;
 
@@ -18,8 +19,6 @@ namespace Lykke.Service.PayHistory
 #else
             Console.WriteLine("Is RELEASE");
 #endif           
-            Console.WriteLine($"ENV_INFO: {EnvInfo}");
-
             try
             {
                 var host = new WebHostBuilder()

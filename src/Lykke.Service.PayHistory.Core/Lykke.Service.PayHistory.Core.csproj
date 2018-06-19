@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <AssemblyName>Lykke.Service.PayHistory.Core</AssemblyName>
     <RootNamespace>Lykke.Service.PayHistory.Core</RootNamespace>
     <Version>1.0.0</Version>
@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Lykke.Common" Version="4.4.2" />
+    <PackageReference Include="Lykke.Common" Version="6.8.5" />
   </ItemGroup>
 
 </Project>

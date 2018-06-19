@@ -1,11 +1,12 @@
-﻿using Lykke.Service.PayHistory.Settings.ServiceSettings;
-using Lykke.Service.PayHistory.Settings.SlackNotifications;
+﻿using JetBrains.Annotations;
+using Lykke.Sdk.Settings;
+using Lykke.Service.PayHistory.Settings.ServiceSettings;
 
 namespace Lykke.Service.PayHistory.Settings
 {
-    public class AppSettings
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
+    public class AppSettings : BaseAppSettings
     {
         public PayHistorySettings PayHistoryService { get; set; }
-        public SlackNotificationsSettings SlackNotifications { get; set; }
     }
 }
