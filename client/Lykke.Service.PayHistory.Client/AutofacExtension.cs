@@ -1,6 +1,8 @@
 ﻿using System;
 using Autofac;
+using Common;
 using Common.Log;
+using Lykke.Service.PayHistory.Client.Publisher;
 
 namespace Lykke.Service.PayHistory.Client
 {
@@ -23,6 +25,23 @@ namespace Lykke.Service.PayHistory.Client
         public static void RegisterPayHistoryClient(this ContainerBuilder builder, PayHistoryServiceClientSettings settings, ILog log)
         {
             builder.RegisterPayHistoryClient(settings?.ServiceUrl, log);
+        }
+
+        public static void RegisterHistoryOperationPublisher(ContainerBuilder builder,
+            RabbitMqPublisherSettings settings, ILog log = null)
+        {
+            var registration = builder.RegisterType<HistoryOperationPublisher>()
+                .AsSelf()
+                .As<IStartable>()
+                .As<IStopable>()
+                .AutoActivate()
+                .SingleInstance()
+                .WithParameter("settings", settings);
+
+            if (log != null)
+            {
+                registration.WithParameter("log", log);
+            }
         }
     }
 }

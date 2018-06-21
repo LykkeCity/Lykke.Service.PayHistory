@@ -6,5 +6,10 @@ namespace Lykke.Service.PayHistory.Settings.ServiceSettings
     {
         [AzureTableCheck]
         public string LogsConnString { get; set; }
+
+        [AzureTableCheck]
+        public string DataConnString { get; set; }
+
+        public string OperationsTableName { get; set; }
     }
 }

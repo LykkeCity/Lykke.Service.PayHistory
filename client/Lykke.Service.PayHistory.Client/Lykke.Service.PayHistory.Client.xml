@@ -4,5 +4,673 @@
         <name>Lykke.Service.PayHistory.Client</name>
     </assembly>
     <members>
+        <member name="T:Lykke.Service.PayHistory.Client.AutorestClient.IPayHistoryAPI">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.IPayHistoryAPI.BaseUri">
+            <summary>
+            The base URI of the service.
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.IPayHistoryAPI.SerializationSettings">
+            <summary>
+            Gets or sets json serialization settings.
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.IPayHistoryAPI.DeserializationSettings">
+            <summary>
+            Gets or sets json deserialization settings.
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.IPayHistoryAPI.GetHistoryWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Returns history operations base info.
+            </summary>
+            <param name='merchantId'>
+            Identifier of the merchant.
+            </param>
+            <param name='customHeaders'>
+            The headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.IPayHistoryAPI.GetDetailsWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Returns details of the history operation.
+            </summary>
+            <param name='merchantId'>
+            Identifier of the merchant.
+            </param>
+            <param name='id'>
+            Identifier of the history operation.
+            </param>
+            <param name='customHeaders'>
+            The headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.IPayHistoryAPI.SetTxHashWithHttpMessagesAsync(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Set TxHash to the history operation.
+            </summary>
+            <param name='merchantId'>
+            Identifier of the merchant.
+            </param>
+            <param name='id'>
+            Identifier of the history operation.
+            </param>
+            <param name='txHash'>
+            TxHash of the history operation.
+            </param>
+            <param name='customHeaders'>
+            The headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.IPayHistoryAPI.IsAliveWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Checks service is alive
+            </summary>
+            <param name='customHeaders'>
+            The headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.Models.ErrorResponse.#ctor">
+            <summary>
+            Initializes a new instance of the ErrorResponse class.
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.Models.ErrorResponse.#ctor(System.String,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IList{System.String}})">
+            <summary>
+            Initializes a new instance of the ErrorResponse class.
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.ErrorResponse.ErrorMessage">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.ErrorResponse.ModelErrors">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationModel.#ctor">
+            <summary>
+            Initializes a new instance of the HistoryOperationModel class.
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationModel.#ctor(System.DateTime,System.Double,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the HistoryOperationModel class.
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationModel.Id">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationModel.MerchantId">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationModel.Type">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationModel.OppositeMerchantId">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationModel.Title">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationModel.CreatedOn">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationModel.Amount">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationModel.AssetId">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationModel.InvoiceId">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationModel.EmployeeEmail">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationModel.TxHash">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationModel.Validate">
+            <summary>
+            Validate the object.
+            </summary>
+            <exception cref="T:Microsoft.Rest.ValidationException">
+            Thrown if validation fails
+            </exception>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the HistoryOperationViewModel class.
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationViewModel.#ctor(System.DateTime,System.Double,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the HistoryOperationViewModel class.
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationViewModel.Id">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationViewModel.Type">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationViewModel.OppositeMerchantId">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationViewModel.Title">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationViewModel.CreatedOn">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationViewModel.Amount">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationViewModel.AssetId">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.Models.HistoryOperationViewModel.Validate">
+            <summary>
+            Validate the object.
+            </summary>
+            <exception cref="T:Microsoft.Rest.ValidationException">
+            Thrown if validation fails
+            </exception>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.Models.IsAliveResponse.#ctor">
+            <summary>
+            Initializes a new instance of the IsAliveResponse class.
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.Models.IsAliveResponse.#ctor(System.Boolean,System.String,System.String,System.String,System.Collections.Generic.IList{Lykke.Service.PayHistory.Client.AutorestClient.Models.IssueIndicator})">
+            <summary>
+            Initializes a new instance of the IsAliveResponse class.
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.IsAliveResponse.Name">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.IsAliveResponse.Version">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.IsAliveResponse.Env">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.IsAliveResponse.IsDebug">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.IsAliveResponse.IssueIndicators">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.Models.IsAliveResponse.Validate">
+            <summary>
+            Validate the object.
+            </summary>
+            <exception cref="T:Microsoft.Rest.ValidationException">
+            Thrown if validation fails
+            </exception>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.Models.IssueIndicator.#ctor">
+            <summary>
+            Initializes a new instance of the IssueIndicator class.
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.Models.IssueIndicator.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the IssueIndicator class.
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.IssueIndicator.Type">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.Models.IssueIndicator.Value">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.PayHistoryAPI.BaseUri">
+            <summary>
+            The base URI of the service.
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.PayHistoryAPI.SerializationSettings">
+            <summary>
+            Gets or sets json serialization settings.
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.PayHistory.Client.AutorestClient.PayHistoryAPI.DeserializationSettings">
+            <summary>
+            Gets or sets json deserialization settings.
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.PayHistoryAPI.#ctor(System.Net.Http.DelegatingHandler[])">
+            <summary>
+            Initializes a new instance of the PayHistoryAPI class.
+            </summary>
+            <param name='handlers'>
+            Optional. The delegating handlers to add to the http client pipeline.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.PayHistoryAPI.#ctor(System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])">
+            <summary>
+            Initializes a new instance of the PayHistoryAPI class.
+            </summary>
+            <param name='rootHandler'>
+            Optional. The http client handler used to handle http transport.
+            </param>
+            <param name='handlers'>
+            Optional. The delegating handlers to add to the http client pipeline.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.PayHistoryAPI.#ctor(System.Uri,System.Net.Http.DelegatingHandler[])">
+            <summary>
+            Initializes a new instance of the PayHistoryAPI class.
+            </summary>
+            <param name='baseUri'>
+            Optional. The base URI of the service.
+            </param>
+            <param name='handlers'>
+            Optional. The delegating handlers to add to the http client pipeline.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when a required parameter is null
+            </exception>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.PayHistoryAPI.#ctor(System.Uri,System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])">
+            <summary>
+            Initializes a new instance of the PayHistoryAPI class.
+            </summary>
+            <param name='baseUri'>
+            Optional. The base URI of the service.
+            </param>
+            <param name='rootHandler'>
+            Optional. The http client handler used to handle http transport.
+            </param>
+            <param name='handlers'>
+            Optional. The delegating handlers to add to the http client pipeline.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when a required parameter is null
+            </exception>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.PayHistoryAPI.Initialize">
+            <summary>
+            Initializes client properties.
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.PayHistoryAPI.GetHistoryWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Returns history operations base info.
+            </summary>
+            <param name='merchantId'>
+            Identifier of the merchant.
+            </param>
+            <param name='customHeaders'>
+            Headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+            <exception cref="T:Microsoft.Rest.HttpOperationException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+            <exception cref="T:Microsoft.Rest.SerializationException">
+            Thrown when unable to deserialize the response
+            </exception>
+            <return>
+            A response object containing the response body and response headers.
+            </return>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.PayHistoryAPI.GetDetailsWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Returns details of the history operation.
+            </summary>
+            <param name='merchantId'>
+            Identifier of the merchant.
+            </param>
+            <param name='id'>
+            Identifier of the history operation.
+            </param>
+            <param name='customHeaders'>
+            Headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+            <exception cref="T:Microsoft.Rest.HttpOperationException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+            <exception cref="T:Microsoft.Rest.SerializationException">
+            Thrown when unable to deserialize the response
+            </exception>
+            <return>
+            A response object containing the response body and response headers.
+            </return>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.PayHistoryAPI.SetTxHashWithHttpMessagesAsync(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Set TxHash to the history operation.
+            </summary>
+            <param name='merchantId'>
+            Identifier of the merchant.
+            </param>
+            <param name='id'>
+            Identifier of the history operation.
+            </param>
+            <param name='txHash'>
+            TxHash of the history operation.
+            </param>
+            <param name='customHeaders'>
+            Headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+            <exception cref="T:Microsoft.Rest.HttpOperationException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+            <exception cref="T:Microsoft.Rest.SerializationException">
+            Thrown when unable to deserialize the response
+            </exception>
+            <return>
+            A response object containing the response body and response headers.
+            </return>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.PayHistoryAPI.IsAliveWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Checks service is alive
+            </summary>
+            <param name='customHeaders'>
+            Headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+            <exception cref="T:Microsoft.Rest.HttpOperationException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+            <exception cref="T:Microsoft.Rest.SerializationException">
+            Thrown when unable to deserialize the response
+            </exception>
+            <return>
+            A response object containing the response body and response headers.
+            </return>
+        </member>
+        <member name="T:Lykke.Service.PayHistory.Client.AutorestClient.PayHistoryAPIExtensions">
+            <summary>
+            Extension methods for PayHistoryAPI.
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.PayHistoryAPIExtensions.GetHistory(Lykke.Service.PayHistory.Client.AutorestClient.IPayHistoryAPI,System.String)">
+            <summary>
+            Returns history operations base info.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='merchantId'>
+            Identifier of the merchant.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.PayHistoryAPIExtensions.GetHistoryAsync(Lykke.Service.PayHistory.Client.AutorestClient.IPayHistoryAPI,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Returns history operations base info.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='merchantId'>
+            Identifier of the merchant.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.PayHistoryAPIExtensions.GetDetails(Lykke.Service.PayHistory.Client.AutorestClient.IPayHistoryAPI,System.String,System.String)">
+            <summary>
+            Returns details of the history operation.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='merchantId'>
+            Identifier of the merchant.
+            </param>
+            <param name='id'>
+            Identifier of the history operation.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.PayHistoryAPIExtensions.GetDetailsAsync(Lykke.Service.PayHistory.Client.AutorestClient.IPayHistoryAPI,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Returns details of the history operation.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='merchantId'>
+            Identifier of the merchant.
+            </param>
+            <param name='id'>
+            Identifier of the history operation.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.PayHistoryAPIExtensions.SetTxHash(Lykke.Service.PayHistory.Client.AutorestClient.IPayHistoryAPI,System.String,System.String,System.String)">
+            <summary>
+            Set TxHash to the history operation.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='merchantId'>
+            Identifier of the merchant.
+            </param>
+            <param name='id'>
+            Identifier of the history operation.
+            </param>
+            <param name='txHash'>
+            TxHash of the history operation.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.PayHistoryAPIExtensions.SetTxHashAsync(Lykke.Service.PayHistory.Client.AutorestClient.IPayHistoryAPI,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Set TxHash to the history operation.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='merchantId'>
+            Identifier of the merchant.
+            </param>
+            <param name='id'>
+            Identifier of the history operation.
+            </param>
+            <param name='txHash'>
+            TxHash of the history operation.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.PayHistoryAPIExtensions.IsAlive(Lykke.Service.PayHistory.Client.AutorestClient.IPayHistoryAPI)">
+            <summary>
+            Checks service is alive
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.AutorestClient.PayHistoryAPIExtensions.IsAliveAsync(Lykke.Service.PayHistory.Client.AutorestClient.IPayHistoryAPI,System.Threading.CancellationToken)">
+            <summary>
+            Checks service is alive
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.IPayHistoryClient.IsAlive">
+            <summary>
+            Checks service is alive
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.IPayHistoryClient.IsAliveAsync(System.Threading.CancellationToken)">
+            <summary>
+            Checks service is alive
+            </summary>
+            <param name="cancellationToken">A cancellation token that can be used to cancel the work.</param>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.IPayHistoryClient.GetHistory(System.String)">
+            <summary>
+            Returns history operations base info.
+            </summary>
+            <param name="merchantId">Identifier of the merchant.</param>
+            <returns>History operations.</returns>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.IPayHistoryClient.GetHistoryAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Returns history operations base info.
+            </summary>
+            <param name="merchantId">Identifier of the merchant.</param>
+            <param name="cancellationToken">A cancellation token that can be used to cancel the work.</param>
+            <returns>History operations.</returns>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.IPayHistoryClient.GetDetails(System.String,System.String)">
+            <summary>
+            Returns details of the history operation.
+            </summary>
+            <param name="merchantId">Identifier of the merchant.</param>
+            <param name="id">Identifier of the history operation.</param>
+            <returns>Details of the history operation.</returns>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.IPayHistoryClient.GetDetailsAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Returns details of the history operation.
+            </summary>
+            <param name="merchantId">Identifier of the merchant.</param>
+            <param name="id">Identifier of the history operation.</param>
+            <param name="cancellationToken">A cancellation token that can be used to cancel the work.</param>
+            <returns>Details of the history operation.</returns>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.IPayHistoryClient.SetTxHash(System.String,System.String,System.String)">
+            <summary>
+            Set TxHash to the history operation.
+            </summary>
+            <param name="merchantId">Identifier of the merchant.</param>
+            <param name="id">Identifier of the history operation.</param>
+            <param name="txHash">TxHash of the history operation.</param>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.IPayHistoryClient.SetTxHashAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Set TxHash to the history operation.
+            </summary>
+            <param name="merchantId">Identifier of the merchant.</param>
+            <param name="id">Identifier of the history operation.</param>
+            <param name="txHash">TxHash of the history operation.</param>
+            <param name="cancellationToken">A cancellation token that can be used to cancel the work.</param>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.PayHistoryClient.IsAlive">
+            <summary>
+            Checks service is alive
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.PayHistoryClient.IsAliveAsync(System.Threading.CancellationToken)">
+            <summary>
+            Checks service is alive
+            </summary>
+            <param name="cancellationToken">A cancellation token that can be used to cancel the work.</param>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.PayHistoryClient.GetHistory(System.String)">
+            <summary>
+            Returns history operations base info.
+            </summary>
+            <param name="merchantId">Identifier of the merchant.</param>
+            <returns>History operations.</returns>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.PayHistoryClient.GetHistoryAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Returns history operations base info.
+            </summary>
+            <param name="merchantId">Identifier of the merchant.</param>
+            <param name="cancellationToken">A cancellation token that can be used to cancel the work.</param>
+            <returns>History operations.</returns>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.PayHistoryClient.GetDetails(System.String,System.String)">
+            <summary>
+            Returns details of the history operation.
+            </summary>
+            <param name="merchantId">Identifier of the merchant.</param>
+            <param name="id">Identifier of the history operation.</param>
+            <returns>Details of the history operation.</returns>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.PayHistoryClient.GetDetailsAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Returns details of the history operation.
+            </summary>
+            <param name="merchantId">Identifier of the merchant.</param>
+            <param name="id">Identifier of the history operation.</param>
+            <param name="cancellationToken">A cancellation token that can be used to cancel the work.</param>
+            <returns>Details of the history operation.</returns>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.PayHistoryClient.SetTxHash(System.String,System.String,System.String)">
+            <summary>
+            Set TxHash to the history operation.
+            </summary>
+            <param name="merchantId">Identifier of the merchant.</param>
+            <param name="id">Identifier of the history operation.</param>
+            <param name="txHash">TxHash of the history operation.</param>
+        </member>
+        <member name="M:Lykke.Service.PayHistory.Client.PayHistoryClient.SetTxHashAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Set TxHash to the history operation.
+            </summary>
+            <param name="merchantId">Identifier of the merchant.</param>
+            <param name="id">Identifier of the history operation.</param>
+            <param name="txHash">TxHash of the history operation.</param>
+            <param name="cancellationToken">A cancellation token that can be used to cancel the work.</param>
+        </member>
     </members>
 </doc>

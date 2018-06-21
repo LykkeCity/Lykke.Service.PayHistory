@@ -2,13 +2,13 @@
 
 namespace Lykke.Service.PayHistory.Settings.ServiceSettings
 {
-    public class RabbitMqSettings
+    public class RabbitMqSubscriberSettings
     {
         [AmqpCheck]
         public string ConnectionString { get; set; }
 
-        public string PaymentRequestsExchangeName { get; set; }
+        public string ExchangeName { get; set; }
 
-        public string TransferRequestsExchangeName { get; set; }
+        public string QueueName { get; set; }
     }
 }

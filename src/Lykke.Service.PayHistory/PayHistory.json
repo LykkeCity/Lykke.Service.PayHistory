@@ -1,0 +1,25 @@
+{
+  "PayHistoryService": {
+    "Db": {
+      "LogsConnString": "DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName=lkedevpayhistory;AccountKey=ddK2gmbeWbclg1pp0RWVLl5vx/9KnL67Ff4s5xkev+90op3VIA1cfp3nN1lfA2FiFHHj1VwfANvhm13prPlghQ==",
+      "DataConnString": "DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName=lkedevpayhistory;AccountKey=ddK2gmbeWbclg1pp0RWVLl5vx/9KnL67Ff4s5xkev+90op3VIA1cfp3nN1lfA2FiFHHj1VwfANvhm13prPlghQ==",
+      "OperationsTableName": "Operations"
+    },
+    "Rabbit": {
+      "ConnectionString": "amqp://lykke.history:lykke.history@rabbit-me.lykke-me.svc.cluster.local:5672",
+      "ExchangeName": "lykke.payhistory.operations",
+      "QueueName": "repository"
+    }
+  },
+  "MonitoringServiceClient": {
+    "MonitoringServiceUrl": "http://monitoring-service.lykke-monitoring.svc.cluster.local"
+  },
+  "SlackNotifications": {
+    "AzureQueue": {
+      "ConnectionString": "DefaultEndpointsProtocol=https;AccountName=lkedevshared;AccountKey=deMBXlOj0telRE7poKY+2P9MwPcSsOJ+1IUqG6xoQ3kdDAMhxzvh22zKAXnlaKyPeF0gpbzgK4k7M9ZLdlTx+w==",
+      "QueueName": "slack-notifications"
+    },
+    "ThrottlingLimitSeconds": 60
+  }
+}
+
