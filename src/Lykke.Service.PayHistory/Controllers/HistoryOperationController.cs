@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Threading.Tasks;
+using Lykke.Service.PayHistory.Core;
 
 namespace Lykke.Service.PayHistory.Controllers
 {
@@ -38,7 +39,8 @@ namespace Lykke.Service.PayHistory.Controllers
         [SwaggerOperation("GetHistory")]
         [ProducesResponseType(typeof(IEnumerable<HistoryOperationViewModel>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> GetHistory([Required]string merchantId)
+        public async Task<IActionResult> GetHistory(
+            [Required, RegularExpression(Constants.AzureKeyValidateRegex)]string merchantId)
         {
             var results = await _historyOperationService.GetHistoryAsync(merchantId);
             var models = _mapper.Map<IEnumerable<HistoryOperationViewModel>>(results);
@@ -57,7 +59,9 @@ namespace Lykke.Service.PayHistory.Controllers
         [ProducesResponseType(typeof(HistoryOperationModel), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<IActionResult> GetDetails([Required]string merchantId, [Required]string id)
+        public async Task<IActionResult> GetDetails(
+            [Required, RegularExpression(Constants.AzureKeyValidateRegex)]string merchantId, 
+            [Required, RegularExpression(Constants.AzureKeyValidateRegex)]string id)
         {
             var result = await _historyOperationService.GetDetailsAsync(merchantId, id);
             if (result == null)
@@ -81,7 +85,9 @@ namespace Lykke.Service.PayHistory.Controllers
         [SwaggerOperation("SetTxHash")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorResponse), (int) HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> SetTxHash([Required]string merchantId, [Required]string id, string txHash)
+        public async Task<IActionResult> SetTxHash(
+            [Required, RegularExpression(Constants.AzureKeyValidateRegex)]string merchantId, 
+            [Required, RegularExpression(Constants.AzureKeyValidateRegex)]string id, string txHash)
         {
             await _historyOperationService.SetTxHashAsync(merchantId, id, txHash);
             return Ok();

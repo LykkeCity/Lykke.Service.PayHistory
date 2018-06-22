@@ -17,6 +17,7 @@ namespace Lykke.Service.PayHistory.Client.Publisher
         decimal Amount { get; }
 
         string AssetId { get; }
+        
         string MerchantId { get; }
 
         string InvoiceId { get; }
