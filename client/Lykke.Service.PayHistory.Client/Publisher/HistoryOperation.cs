@@ -1,4 +1,6 @@
 ﻿using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Lykke.Service.PayHistory.Client.Publisher
 {
@@ -16,6 +18,7 @@ namespace Lykke.Service.PayHistory.Client.Publisher
             Id = id;
         }
 
+        [JsonConverter(typeof(StringEnumConverter))]
         public HistoryOperationType Type { get; set; }
 
         public string OppositeMerchantId { get; set; }
