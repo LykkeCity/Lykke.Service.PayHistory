@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Autofac;
 using Common;
 using Common.Log;
@@ -58,20 +59,33 @@ namespace Lykke.Service.PayHistory.Client.Publisher
                 var modelErrors = new Dictionary<string, IList<string>>();
                 foreach (ValidationResult validationResult in results)
                 {
-                    foreach (string memberName in validationResult.MemberNames)
+                    if (validationResult.MemberNames != null && validationResult.MemberNames.Any())
                     {
-                        if (!modelErrors.TryGetValue(memberName, out var errors))
+                        foreach (string memberName in validationResult.MemberNames)
                         {
-                            errors = new List<string>();
-                            modelErrors[memberName] = errors;
+                            AddModelError(modelErrors, memberName, validationResult.ErrorMessage);
                         }
-
-                        errors.Add(validationResult.ErrorMessage);
+                    }
+                    else
+                    {
+                        AddModelError(modelErrors, string.Empty, validationResult.ErrorMessage);
                     }
                 }
 
                 throw new PayHistoryApiException("Model is invalid.", modelErrors);
             }
+        }
+
+        private void AddModelError(Dictionary<string, IList<string>> modelErrors, string memberName, 
+            string errorMessage)
+        {
+            if (!modelErrors.TryGetValue(memberName, out var errors))
+            {
+                errors = new List<string>();
+                modelErrors[memberName] = errors;
+            }
+
+            errors.Add(errorMessage);
         }
 
         public void Dispose()

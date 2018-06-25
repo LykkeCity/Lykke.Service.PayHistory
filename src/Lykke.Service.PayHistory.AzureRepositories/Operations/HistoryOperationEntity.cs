@@ -24,37 +24,22 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
             }
         }
 
-        private string _oppositeMerchantId;
         public string OppositeMerchantId
         {
-            get => _oppositeMerchantId;
-            set
-            {
-                _oppositeMerchantId = value;
-                MarkValueTypePropertyAsDirty(nameof(OppositeMerchantId));
-            }
+            get;
+            set;
         }
 
-        private string _invoiceId;
         public string InvoiceId
         {
-            get => _invoiceId;
-            set
-            {
-                _invoiceId = value;
-                MarkValueTypePropertyAsDirty(nameof(InvoiceId));
-            }
+            get;
+            set;
         }
 
-        private string _title;
         public string Title
         {
-            get => _title;
-            set
-            {
-                _title = value;
-                MarkValueTypePropertyAsDirty(nameof(Title));
-            }
+            get;
+            set;
         }
 
         private DateTime _createdOn;
@@ -79,37 +64,22 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
             }
         }
 
-        private string _assetId;
         public string AssetId
         {
-            get => _assetId;
-            set
-            {
-                _assetId = value;
-                MarkValueTypePropertyAsDirty(nameof(AssetId));
-            }
+            get;
+            set;
         }
 
-        private string _employeeEmail;
         public string EmployeeEmail
         {
-            get => _employeeEmail;
-            set
-            {
-                _employeeEmail = value;
-                MarkValueTypePropertyAsDirty(nameof(EmployeeEmail));
-            }
+            get;
+            set;
         }
 
-        private string _txHash;
         public string TxHash
         {
-            get => _txHash;
-            set
-            {
-                _txHash = value;
-                MarkValueTypePropertyAsDirty(nameof(TxHash));
-            }
+            get;
+            set;
         }
 
         public HistoryOperationEntity()

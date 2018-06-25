@@ -1,12 +1,8 @@
-﻿using System;
-using Lykke.Common.Api.Contract.Responses;
-using Lykke.Common.ApiLibrary.Middleware;
-using Lykke.Sdk;
+﻿using Lykke.Sdk;
 using Lykke.Service.PayHistory.Settings;
-using Lykke.SettingsReader;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Lykke.Service.PayHistory
 {

@@ -7,7 +7,7 @@ namespace Lykke.Service.PayHistory.Client.Publisher
 {
     public class HistoryOperation : IHistoryOperation
     {
-        [Required, RegularExpression(Constants.AzureKeyValidateRegex)]
+        [Required, PartitionOrRowKey]
         public string Id { get; }
 
         public HistoryOperation()
@@ -29,7 +29,6 @@ namespace Lykke.Service.PayHistory.Client.Publisher
         [Required]
         public string Title { get; set; }
 
-        [Required]
         public DateTime CreatedOn { get; set; }
 
         public decimal Amount { get; set; }
@@ -37,7 +36,7 @@ namespace Lykke.Service.PayHistory.Client.Publisher
         [Required]
         public string AssetId { get; set; }
 
-        [Required, RegularExpression(Constants.AzureKeyValidateRegex)]
+        [Required, PartitionOrRowKey]
         public string MerchantId { get; set; }
 
         public string InvoiceId { get; set; }

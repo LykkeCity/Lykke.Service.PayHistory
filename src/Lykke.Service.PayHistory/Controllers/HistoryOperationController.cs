@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Lykke.Common.Api.Contract.Responses;
+using Lykke.Service.PayHistory.Client.Publisher;
 using Lykke.Service.PayHistory.Core.Services;
 using Lykke.Service.PayHistory.Filters;
 using Lykke.Service.PayHistory.Models;
@@ -9,13 +10,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Threading.Tasks;
-using Lykke.Service.PayHistory.Core;
 
 namespace Lykke.Service.PayHistory.Controllers
 {
-    //[ApiVersion("1.0")]
     [ValidateActionParametersFilter]
-    [ServiceFilter(typeof(ErrorResponceExceptionFilterAttribute))]
     [Route("api/[controller]/[action]")]
     public class HistoryOperationController : Controller
     {
@@ -40,7 +38,7 @@ namespace Lykke.Service.PayHistory.Controllers
         [ProducesResponseType(typeof(IEnumerable<HistoryOperationViewModel>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetHistory(
-            [Required, RegularExpression(Constants.AzureKeyValidateRegex)]string merchantId)
+            [Required, PartitionOrRowKey]string merchantId)
         {
             var results = await _historyOperationService.GetHistoryAsync(merchantId);
             var models = _mapper.Map<IEnumerable<HistoryOperationViewModel>>(results);
@@ -60,8 +58,8 @@ namespace Lykke.Service.PayHistory.Controllers
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetDetails(
-            [Required, RegularExpression(Constants.AzureKeyValidateRegex)]string merchantId, 
-            [Required, RegularExpression(Constants.AzureKeyValidateRegex)]string id)
+            [Required, PartitionOrRowKey]string merchantId, 
+            [Required, PartitionOrRowKey]string id)
         {
             var result = await _historyOperationService.GetDetailsAsync(merchantId, id);
             if (result == null)
@@ -86,8 +84,8 @@ namespace Lykke.Service.PayHistory.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorResponse), (int) HttpStatusCode.BadRequest)]
         public async Task<IActionResult> SetTxHash(
-            [Required, RegularExpression(Constants.AzureKeyValidateRegex)]string merchantId, 
-            [Required, RegularExpression(Constants.AzureKeyValidateRegex)]string id, string txHash)
+            [Required, PartitionOrRowKey]string merchantId, 
+            [Required, PartitionOrRowKey]string id, string txHash)
         {
             await _historyOperationService.SetTxHashAsync(merchantId, id, txHash);
             return Ok();

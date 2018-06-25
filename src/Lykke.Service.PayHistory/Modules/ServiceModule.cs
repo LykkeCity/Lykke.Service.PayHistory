@@ -37,8 +37,6 @@ namespace Lykke.Service.PayHistory.Modules
             IMapper mapper = mapperProvider.GetMapper();
             builder.RegisterInstance(mapper).As<IMapper>();
 
-            builder.RegisterType<ErrorResponceExceptionFilterAttribute>();
-
             builder.RegisterInstance<IHistoryOperationRepository>(
                 new HistoryOperationRepository(
                     AzureTableStorage<HistoryOperationEntity>.Create(
