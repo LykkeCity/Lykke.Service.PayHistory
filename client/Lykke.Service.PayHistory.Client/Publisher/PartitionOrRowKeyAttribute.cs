@@ -5,7 +5,7 @@ namespace Lykke.Service.PayHistory.Client.Publisher
 {
     public class PartitionOrRowKeyAttribute : ValidationAttribute
     {
-        public PartitionOrRowKeyAttribute() : base("The field {0} must be a valid azure key.")
+        public PartitionOrRowKeyAttribute() : base("The {0} field must be a valid azure key.")
         {
         }
 
@@ -14,7 +14,7 @@ namespace Lykke.Service.PayHistory.Client.Publisher
             var key = value as string;
             if (key == null)
             {
-                return base.IsValid(value, validationContext);
+                return ValidationResult.Success;
             }
 
             if (StringUtils.IsValidPartitionOrRowKey(key))
