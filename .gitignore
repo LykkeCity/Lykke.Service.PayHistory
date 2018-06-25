@@ -61,5 +61,6 @@ node_modules
 **/appsettings.*.json
 **/*sonar*
 
-#AutorestClient
+#Custom
 client/Lykke.Service.PayHistory.Client/Lykke.Service.PayHistory.Client.xml
+src/Lykke.Service.PayHistory/PayHistory.json
