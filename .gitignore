@@ -59,3 +59,8 @@ node_modules
 **/launchSettings.json
 **/appsettings.json
 **/appsettings.*.json
+**/*sonar*
+
+#Custom
+client/Lykke.Service.PayHistory.Client/Lykke.Service.PayHistory.Client.xml
+src/Lykke.Service.PayHistory/PayHistory.json

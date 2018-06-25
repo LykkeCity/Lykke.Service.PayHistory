@@ -1,54 +1,58 @@
 ﻿using Autofac;
-using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
+using AzureStorage.Tables;
+using Common;
 using Common.Log;
+using Lykke.Sdk;
+using Lykke.Service.PayHistory.AzureRepositories.Operations;
+using Lykke.Service.PayHistory.Core.Domain;
 using Lykke.Service.PayHistory.Core.Services;
-using Lykke.Service.PayHistory.Settings.ServiceSettings;
+using Lykke.Service.PayHistory.Filters;
+using Lykke.Service.PayHistory.Rabbit;
 using Lykke.Service.PayHistory.Services;
+using Lykke.Service.PayHistory.Settings;
 using Lykke.SettingsReader;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Lykke.Service.PayHistory.Modules
 {
     public class ServiceModule : Module
     {
-        private readonly IReloadingManager<PayHistorySettings> _settings;
+        private readonly IReloadingManager<AppSettings> _appSettings;
         private readonly ILog _log;
-        // NOTE: you can remove it if you don't need to use IServiceCollection extensions to register service specific dependencies
-        private readonly IServiceCollection _services;
 
-        public ServiceModule(IReloadingManager<PayHistorySettings> settings, ILog log)
+        public ServiceModule(IReloadingManager<AppSettings> appSettings, ILog log)
         {
-            _settings = settings;
+            _appSettings = appSettings;
             _log = log;
-
-            _services = new ServiceCollection();
         }
 
         protected override void Load(ContainerBuilder builder)
         {
-            // TODO: Do not register entire settings in container, pass necessary settings to services which requires them
-            // ex:
-            //  builder.RegisterType<QuotesPublisher>()
-            //      .As<IQuotesPublisher>()
-            //      .WithParameter(TypedParameter.From(_settings.CurrentValue.QuotesPublication))
-
+            // Do not register entire settings in container, pass necessary settings to services which requires them
             builder.RegisterInstance(_log)
                 .As<ILog>()
                 .SingleInstance();
 
-            builder.RegisterType<HealthService>()
-                .As<IHealthService>()
+            var mapperProvider = new MapperProvider();
+            IMapper mapper = mapperProvider.GetMapper();
+            builder.RegisterInstance(mapper).As<IMapper>();
+
+            builder.RegisterInstance<IHistoryOperationRepository>(
+                new HistoryOperationRepository(
+                    AzureTableStorage<HistoryOperationEntity>.Create(
+                        _appSettings.ConnectionString(x => x.PayHistoryService.Db.DataConnString),
+                        _appSettings.CurrentValue.PayHistoryService.Db.OperationsTableName, _log)));
+
+            builder.RegisterType<HistoryOperationService>()
+                .As<IHistoryOperationService>()
                 .SingleInstance();
 
-            builder.RegisterType<StartupManager>()
-                .As<IStartupManager>();
-
-            builder.RegisterType<ShutdownManager>()
-                .As<IShutdownManager>();
-
-            // TODO: Add your dependencies here
-
-            builder.Populate(_services);
+            builder.RegisterType<HistoryOperationSubscruber>()
+                .As<IStartable>()
+                .As<IStopable>()
+                .AutoActivate()
+                .SingleInstance()
+                .WithParameter("settings", _appSettings.CurrentValue.PayHistoryService.Rabbit);
         }
     }
 }
