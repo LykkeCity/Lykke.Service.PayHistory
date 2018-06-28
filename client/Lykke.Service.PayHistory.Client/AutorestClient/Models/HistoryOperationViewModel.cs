@@ -25,12 +25,11 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
         /// <param name="type">Possible values include: 'None', 'Recharge',
         /// 'OutgoingInvoicePayment', 'IncomingInvoicePayment',
         /// 'OutgoingExchange', 'IncomingExchange', 'Withdrawal'</param>
-        public HistoryOperationViewModel(HistoryOperationType type, System.DateTime createdOn, double amount, string id = default(string), string oppositeMerchantId = default(string), string title = default(string), string assetId = default(string), string invoiceId = default(string))
+        public HistoryOperationViewModel(HistoryOperationType type, System.DateTime createdOn, double amount, string id = default(string), string oppositeMerchantId = default(string), string assetId = default(string), string invoiceId = default(string))
         {
             Id = id;
             Type = type;
             OppositeMerchantId = oppositeMerchantId;
-            Title = title;
             CreatedOn = createdOn;
             Amount = amount;
             AssetId = assetId;
@@ -60,11 +59,6 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
         /// </summary>
         [JsonProperty(PropertyName = "OppositeMerchantId")]
         public string OppositeMerchantId { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Title")]
-        public string Title { get; set; }
 
         /// <summary>
         /// </summary>

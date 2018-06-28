@@ -26,9 +26,6 @@ namespace Lykke.Service.PayHistory.Client.Publisher
 
         public string OppositeMerchantId { get; set; }
 
-        [Required]
-        public string Title { get; set; }
-
         public DateTime CreatedOn { get; set; }
 
         public decimal Amount { get; set; }

@@ -10,8 +10,6 @@ namespace Lykke.Service.PayHistory.Core.Domain
 
         string OppositeMerchantId { get; }
 
-        string Title { get; }
-
         DateTime CreatedOn { get; }
 
         decimal Amount { get; }
