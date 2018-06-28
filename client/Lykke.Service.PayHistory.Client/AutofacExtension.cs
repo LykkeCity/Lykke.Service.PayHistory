@@ -27,7 +27,7 @@ namespace Lykke.Service.PayHistory.Client
             builder.RegisterPayHistoryClient(settings?.ServiceUrl, log);
         }
 
-        public static void RegisterHistoryOperationPublisher(ContainerBuilder builder,
+        public static void RegisterHistoryOperationPublisher(this ContainerBuilder builder,
             RabbitMqPublisherSettings settings, ILog log = null)
         {
             var registration = builder.RegisterType<HistoryOperationPublisher>()

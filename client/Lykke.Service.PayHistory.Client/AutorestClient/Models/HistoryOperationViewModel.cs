@@ -22,7 +22,10 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
         /// <summary>
         /// Initializes a new instance of the HistoryOperationViewModel class.
         /// </summary>
-        public HistoryOperationViewModel(System.DateTime createdOn, double amount, string id = default(string), string type = default(string), string oppositeMerchantId = default(string), string title = default(string), string assetId = default(string))
+        /// <param name="type">Possible values include: 'None', 'Recharge',
+        /// 'OutgoingInvoicePayment', 'IncomingInvoicePayment',
+        /// 'OutgoingExchange', 'IncomingExchange', 'Withdrawal'</param>
+        public HistoryOperationViewModel(HistoryOperationType type, System.DateTime createdOn, double amount, string id = default(string), string oppositeMerchantId = default(string), string title = default(string), string assetId = default(string), string invoiceId = default(string))
         {
             Id = id;
             Type = type;
@@ -31,6 +34,7 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
             CreatedOn = createdOn;
             Amount = amount;
             AssetId = assetId;
+            InvoiceId = invoiceId;
             CustomInit();
         }
 
@@ -45,9 +49,12 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
         public string Id { get; set; }
 
         /// <summary>
+        /// Gets or sets possible values include: 'None', 'Recharge',
+        /// 'OutgoingInvoicePayment', 'IncomingInvoicePayment',
+        /// 'OutgoingExchange', 'IncomingExchange', 'Withdrawal'
         /// </summary>
         [JsonProperty(PropertyName = "Type")]
-        public string Type { get; set; }
+        public HistoryOperationType Type { get; set; }
 
         /// <summary>
         /// </summary>
@@ -75,6 +82,11 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
         public string AssetId { get; set; }
 
         /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "InvoiceId")]
+        public string InvoiceId { get; set; }
+
+        /// <summary>
         /// Validate the object.
         /// </summary>
         /// <exception cref="Microsoft.Rest.ValidationException">
@@ -82,7 +94,6 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
         /// </exception>
         public virtual void Validate()
         {
-            //Nothing to validate
         }
     }
 }

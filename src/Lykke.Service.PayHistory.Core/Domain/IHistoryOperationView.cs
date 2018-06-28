@@ -16,6 +16,8 @@ namespace Lykke.Service.PayHistory.Core.Domain
 
         decimal Amount { get; }
 
-        string AssetId { get;  }
+        string AssetId { get; }
+
+        string InvoiceId { get; }
     }
 }

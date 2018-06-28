@@ -5,26 +5,9 @@ using Newtonsoft.Json.Converters;
 
 namespace Lykke.Service.PayHistory.Models
 {
-    public class HistoryOperationModel
+    public class HistoryOperationModel : HistoryOperationViewModel
     {
-        public string Id { get; set; }
-
         public string MerchantId { get; set; }
-
-        [JsonConverter(typeof(StringEnumConverter))]
-        public HistoryOperationType Type { get; set; }
-
-        public string OppositeMerchantId { get; set; }
-
-        public string Title { get; set; }
-
-        public DateTime CreatedOn { get; set; }
-
-        public decimal Amount { get; set; }
-
-        public string AssetId { get; set; }
-
-        public string InvoiceId { get; set; }
 
         public string EmployeeEmail { get; set; }
 

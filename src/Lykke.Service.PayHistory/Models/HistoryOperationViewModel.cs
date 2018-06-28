@@ -21,5 +21,7 @@ namespace Lykke.Service.PayHistory.Models
         public decimal Amount { get; set; }
 
         public string AssetId { get; set; }
+
+        public string InvoiceId { get; set; }
     }
 }
