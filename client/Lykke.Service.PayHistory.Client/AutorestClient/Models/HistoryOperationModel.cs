@@ -22,19 +22,21 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
         /// <summary>
         /// Initializes a new instance of the HistoryOperationModel class.
         /// </summary>
-        public HistoryOperationModel(System.DateTime createdOn, double amount, string id = default(string), string merchantId = default(string), string type = default(string), string oppositeMerchantId = default(string), string title = default(string), string assetId = default(string), string invoiceId = default(string), string employeeEmail = default(string), string txHash = default(string))
+        /// <param name="type">Possible values include: 'None', 'Recharge',
+        /// 'OutgoingInvoicePayment', 'IncomingInvoicePayment',
+        /// 'OutgoingExchange', 'IncomingExchange', 'Withdrawal'</param>
+        public HistoryOperationModel(HistoryOperationType type, System.DateTime createdOn, double amount, string merchantId = default(string), string employeeEmail = default(string), string txHash = default(string), string id = default(string), string oppositeMerchantId = default(string), string assetId = default(string), string invoiceId = default(string))
         {
-            Id = id;
             MerchantId = merchantId;
+            EmployeeEmail = employeeEmail;
+            TxHash = txHash;
+            Id = id;
             Type = type;
             OppositeMerchantId = oppositeMerchantId;
-            Title = title;
             CreatedOn = createdOn;
             Amount = amount;
             AssetId = assetId;
             InvoiceId = invoiceId;
-            EmployeeEmail = employeeEmail;
-            TxHash = txHash;
             CustomInit();
         }
 
@@ -45,28 +47,36 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Id")]
-        public string Id { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "MerchantId")]
         public string MerchantId { get; set; }
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "EmployeeEmail")]
+        public string EmployeeEmail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "TxHash")]
+        public string TxHash { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Id")]
+        public string Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets possible values include: 'None', 'Recharge',
+        /// 'OutgoingInvoicePayment', 'IncomingInvoicePayment',
+        /// 'OutgoingExchange', 'IncomingExchange', 'Withdrawal'
+        /// </summary>
         [JsonProperty(PropertyName = "Type")]
-        public string Type { get; set; }
+        public HistoryOperationType Type { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "OppositeMerchantId")]
         public string OppositeMerchantId { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Title")]
-        public string Title { get; set; }
 
         /// <summary>
         /// </summary>
@@ -89,16 +99,6 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
         public string InvoiceId { get; set; }
 
         /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "EmployeeEmail")]
-        public string EmployeeEmail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "TxHash")]
-        public string TxHash { get; set; }
-
-        /// <summary>
         /// Validate the object.
         /// </summary>
         /// <exception cref="Microsoft.Rest.ValidationException">
@@ -106,7 +106,6 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
         /// </exception>
         public virtual void Validate()
         {
-            //Nothing to validate
         }
     }
 }

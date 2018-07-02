@@ -36,12 +36,6 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
             set;
         }
 
-        public string Title
-        {
-            get;
-            set;
-        }
-
         private DateTime _createdOn;
         public DateTime CreatedOn
         {
@@ -93,7 +87,6 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
             Type = historyOperation.Type;
             OppositeMerchantId = historyOperation.OppositeMerchantId;
             InvoiceId = historyOperation.InvoiceId;
-            Title = historyOperation.Title;
             CreatedOn = historyOperation.CreatedOn;
             Amount = historyOperation.Amount;
             AssetId = historyOperation.AssetId;

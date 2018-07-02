@@ -14,12 +14,12 @@ namespace Lykke.Service.PayHistory.Models
 
         public string OppositeMerchantId { get; set; }
 
-        public string Title { get; set; }
-
         public DateTime CreatedOn { get; set; }
 
         public decimal Amount { get; set; }
 
         public string AssetId { get; set; }
+
+        public string InvoiceId { get; set; }
     }
 }
