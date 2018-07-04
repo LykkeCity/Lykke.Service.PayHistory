@@ -23,7 +23,7 @@ namespace Lykke.Service.PayHistory.Client.Publisher
 
         [Required]
         [JsonConverter(typeof(StringEnumConverter))]
-        public Core.Domain.HistoryOperationType Type { get; set; }
+        public HistoryOperationType Type { get; set; }
 
         public string OppositeMerchantId { get; set; }
 
@@ -38,6 +38,8 @@ namespace Lykke.Service.PayHistory.Client.Publisher
         public string MerchantId { get; set; }
 
         public string InvoiceId { get; set; }
+
+        public string InvoiceStatus { get; set; }
 
         public string EmployeeEmail { get; set; }
 
