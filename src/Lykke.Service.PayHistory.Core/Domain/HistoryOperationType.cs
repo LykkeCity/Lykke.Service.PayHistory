@@ -9,7 +9,7 @@
         OutgoingExchange = 4,
         IncomingExchange = 5,
         Withdrawal = 6,
-        CashOut = 7
-
+        CashOut = 7,
+        PartiallyPaid = 8
     }
 }
