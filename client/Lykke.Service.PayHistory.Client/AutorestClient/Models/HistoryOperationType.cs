@@ -32,9 +32,7 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
         [EnumMember(Value = "Withdrawal")]
         Withdrawal,
         [EnumMember(Value = "CashOut")]
-        CashOut,
-        [EnumMember(Value = "PartiallyPaid")]
-        PartiallyPaid
+        CashOut
     }
     internal static class HistoryOperationTypeEnumExtension
     {
@@ -63,8 +61,6 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
                     return "Withdrawal";
                 case HistoryOperationType.CashOut:
                     return "CashOut";
-                case HistoryOperationType.PartiallyPaid:
-                    return "PartiallyPaid";
             }
             return null;
         }
@@ -89,8 +85,6 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
                     return HistoryOperationType.Withdrawal;
                 case "CashOut":
                     return HistoryOperationType.CashOut;
-                case "PartiallyPaid":
-                    return HistoryOperationType.PartiallyPaid;
             }
             return null;
         }
