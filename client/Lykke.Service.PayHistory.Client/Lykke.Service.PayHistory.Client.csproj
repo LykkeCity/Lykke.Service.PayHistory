@@ -24,6 +24,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\src\Lykke.Service.PayHistory.Core\Domain\HistoryOperationType.cs" Link="Publisher\HistoryOperationType.cs" />
+    <Compile Include="..\..\src\Lykke.Service.PayHistory.Core\Domain\IHistoryOperation.cs" Link="Publisher\IHistoryOperation.cs" />
+    <Compile Include="..\..\src\Lykke.Service.PayHistory.Core\Domain\IHistoryOperationView.cs" Link="Publisher\IHistoryOperationView.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Lykke.Common" Version="6.8.6" />
     <PackageReference Include="Lykke.RabbitMqBroker" Version="7.0.1" />
     <PackageReference Include="Lykke.SettingsReader" Version="2.4.0" />

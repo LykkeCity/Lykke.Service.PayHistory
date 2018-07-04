@@ -1,7 +1,8 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using Lykke.Service.PayHistory.Core.Domain;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Lykke.Service.PayHistory.Client.Publisher
 {
@@ -22,7 +23,7 @@ namespace Lykke.Service.PayHistory.Client.Publisher
 
         [Required]
         [JsonConverter(typeof(StringEnumConverter))]
-        public HistoryOperationType Type { get; set; }
+        public Core.Domain.HistoryOperationType Type { get; set; }
 
         public string OppositeMerchantId { get; set; }
 

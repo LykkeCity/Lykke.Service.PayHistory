@@ -8,6 +8,7 @@ using Lykke.RabbitMqBroker.Publisher;
 using Lykke.RabbitMqBroker.Subscriber;
 using System.Threading.Tasks;
 using Lykke.Service.PayHistory.Client.Models;
+using Lykke.Service.PayHistory.Core.Domain;
 
 namespace Lykke.Service.PayHistory.Client.Publisher
 {
