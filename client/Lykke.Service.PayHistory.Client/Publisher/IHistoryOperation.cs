@@ -21,6 +21,8 @@ namespace Lykke.Service.PayHistory.Client.Publisher
 
         string InvoiceId { get; }
 
+        string InvoiceStatus { get; }
+
         string MerchantId { get; }
 
         string EmployeeEmail { get; }
