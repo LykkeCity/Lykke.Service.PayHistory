@@ -26,7 +26,7 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
         /// 'OutgoingInvoicePayment', 'IncomingInvoicePayment',
         /// 'OutgoingExchange', 'IncomingExchange', 'Withdrawal',
         /// 'CashOut'</param>
-        public HistoryOperationModel(HistoryOperationType type, System.DateTime createdOn, double amount, string invoiceStatus = default(string), string merchantId = default(string), string employeeEmail = default(string), string txHash = default(string), string id = default(string), string oppositeMerchantId = default(string), string assetId = default(string), string invoiceId = default(string))
+        public HistoryOperationModel(HistoryOperationType type, System.DateTime createdOn, double amount, string invoiceStatus = default(string), string merchantId = default(string), string employeeEmail = default(string), string txHash = default(string), string id = default(string), string oppositeMerchantId = default(string), string assetId = default(string), string desiredAssetId = default(string), string invoiceId = default(string))
         {
             InvoiceStatus = invoiceStatus;
             MerchantId = merchantId;
@@ -38,6 +38,7 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
             CreatedOn = createdOn;
             Amount = amount;
             AssetId = assetId;
+            DesiredAssetId = desiredAssetId;
             InvoiceId = invoiceId;
             CustomInit();
         }
@@ -99,6 +100,11 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
         /// </summary>
         [JsonProperty(PropertyName = "AssetId")]
         public string AssetId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "DesiredAssetId")]
+        public string DesiredAssetId { get; set; }
 
         /// <summary>
         /// </summary>
