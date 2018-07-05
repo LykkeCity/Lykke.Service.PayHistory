@@ -1,8 +1,8 @@
-﻿using Lykke.Service.PayHistory.Core.Domain;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.ComponentModel.DataAnnotations;
+using Lykke.Service.PayHistory.Client.AutorestClient.Models;
 
 namespace Lykke.Service.PayHistory.Client.Publisher
 {
@@ -23,7 +23,7 @@ namespace Lykke.Service.PayHistory.Client.Publisher
 
         [Required]
         [JsonConverter(typeof(StringEnumConverter))]
-        public Core.Domain.HistoryOperationType Type { get; set; }
+        public HistoryOperationType Type { get; set; }
 
         public string OppositeMerchantId { get; set; }
 
@@ -33,6 +33,8 @@ namespace Lykke.Service.PayHistory.Client.Publisher
 
         [Required]
         public string AssetId { get; set; }
+
+        public string DesiredAssetId { get; set; }
 
         [Required, PartitionOrRowKey]
         public string MerchantId { get; set; }

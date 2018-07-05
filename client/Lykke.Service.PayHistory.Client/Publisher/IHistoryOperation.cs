@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Lykke.Service.PayHistory.Client.AutorestClient.Models;
+using System;
 
-namespace Lykke.Service.PayHistory.Core.Domain
+namespace Lykke.Service.PayHistory.Client.Publisher
 {
-    public interface IHistoryOperationView
+    public interface IHistoryOperation
     {
         string Id { get; }
 
@@ -19,5 +20,11 @@ namespace Lykke.Service.PayHistory.Core.Domain
         string DesiredAssetId { get; }
 
         string InvoiceId { get; }
+
+        string MerchantId { get; }
+
+        string EmployeeEmail { get; }
+
+        string TxHash { get; set; }
     }
 }
