@@ -102,8 +102,23 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
         }
 
         internal static string GetPartitionKey(string merchantId)
-            => merchantId;
+        {
+            if (string.IsNullOrEmpty(merchantId))
+            {
+                throw new ArgumentNullException(merchantId);
+            }
+
+            return merchantId;
+        }
+
         internal static string GetRowKey(string id)
-            => id;
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                throw new ArgumentNullException(id);
+            }
+
+            return id;
+        }
     }
 }
