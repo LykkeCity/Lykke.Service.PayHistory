@@ -46,6 +46,24 @@ namespace Lykke.Service.PayHistory.Controllers
         }
 
         /// <summary>
+        /// Returns history operations base info.
+        /// </summary>
+        /// <param name="invoiceId">Identifier of the invoice.</param>
+        /// <returns code="200">History operations.</returns>
+        /// <returns code="400">Input arguments are invalid.</returns>
+        [HttpGet]
+        [SwaggerOperation("GetHistoryByInvoice")]
+        [ProducesResponseType(typeof(IEnumerable<HistoryOperationViewModel>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> GetHistoryByInvoice(
+            [Required, PartitionOrRowKey]string invoiceId)
+        {
+            var results = await _historyOperationService.GetHistoryByInvoiceAsync(invoiceId);
+            var models = _mapper.Map<IEnumerable<HistoryOperationViewModel>>(results);
+            return Ok(models);
+        }
+
+        /// <summary>
         /// Returns details of the history operation.
         /// </summary>
         /// <param name="merchantId">Identifier of the merchant.</param>

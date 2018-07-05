@@ -70,6 +70,12 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
             set;
         }
 
+        public string DesiredAssetId
+        {
+            get;
+            set;
+        }
+
         public string EmployeeEmail
         {
             get;
@@ -97,13 +103,29 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
             CreatedOn = historyOperation.CreatedOn;
             Amount = historyOperation.Amount;
             AssetId = historyOperation.AssetId;
+            DesiredAssetId = historyOperation.DesiredAssetId;
             EmployeeEmail = historyOperation.EmployeeEmail;
             TxHash = historyOperation.TxHash;
         }
 
         internal static string GetPartitionKey(string merchantId)
-            => merchantId;
+        {
+            if (string.IsNullOrEmpty(merchantId))
+            {
+                throw new ArgumentNullException(merchantId);
+            }
+
+            return merchantId;
+        }
+
         internal static string GetRowKey(string id)
-            => id;
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                throw new ArgumentNullException(id);
+            }
+
+            return id;
+        }
     }
 }

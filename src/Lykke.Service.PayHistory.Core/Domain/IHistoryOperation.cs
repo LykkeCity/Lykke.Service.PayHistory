@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Lykke.Service.PayHistory.Core.Domain
+﻿namespace Lykke.Service.PayHistory.Core.Domain
 {
     public interface IHistoryOperation: IHistoryOperationView
     {

@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using AutoMapper;
 using AzureStorage.Tables;
+using AzureStorage.Tables.Templates.Index;
 using Common;
 using Common.Log;
 using Lykke.Sdk;
@@ -40,6 +41,9 @@ namespace Lykke.Service.PayHistory.Modules
             builder.RegisterInstance<IHistoryOperationRepository>(
                 new HistoryOperationRepository(
                     AzureTableStorage<HistoryOperationEntity>.Create(
+                        _appSettings.ConnectionString(x => x.PayHistoryService.Db.DataConnString),
+                        _appSettings.CurrentValue.PayHistoryService.Db.OperationsTableName, _log),
+                    AzureTableStorage<AzureIndex>.Create(
                         _appSettings.ConnectionString(x => x.PayHistoryService.Db.DataConnString),
                         _appSettings.CurrentValue.PayHistoryService.Db.OperationsTableName, _log)));
 
