@@ -6,9 +6,7 @@ using Newtonsoft.Json.Converters;
 namespace Lykke.Service.PayHistory.Models
 {
     public class HistoryOperationModel : HistoryOperationViewModel
-    {
-        public string InvoiceStatus { get; set; }
-
+    {  
         public string MerchantId { get; set; }
 
         public string EmployeeEmail { get; set; }

@@ -26,9 +26,8 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
         /// 'OutgoingInvoicePayment', 'IncomingInvoicePayment',
         /// 'OutgoingExchange', 'IncomingExchange', 'Withdrawal',
         /// 'CashOut'</param>
-        public HistoryOperationModel(HistoryOperationType type, System.DateTime createdOn, double amount, string invoiceStatus = default(string), string merchantId = default(string), string employeeEmail = default(string), string txHash = default(string), string id = default(string), string oppositeMerchantId = default(string), string assetId = default(string), string desiredAssetId = default(string), string invoiceId = default(string))
+        public HistoryOperationModel(HistoryOperationType type, System.DateTime createdOn, double amount, string merchantId = default(string), string employeeEmail = default(string), string txHash = default(string), string id = default(string), string oppositeMerchantId = default(string), string assetId = default(string), string desiredAssetId = default(string), string invoiceId = default(string), string invoiceStatus = default(string))
         {
-            InvoiceStatus = invoiceStatus;
             MerchantId = merchantId;
             EmployeeEmail = employeeEmail;
             TxHash = txHash;
@@ -40,6 +39,7 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
             AssetId = assetId;
             DesiredAssetId = desiredAssetId;
             InvoiceId = invoiceId;
+            InvoiceStatus = invoiceStatus;
             CustomInit();
         }
 
@@ -47,11 +47,6 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "InvoiceStatus")]
-        public string InvoiceStatus { get; set; }
 
         /// <summary>
         /// </summary>
@@ -110,6 +105,11 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
         /// </summary>
         [JsonProperty(PropertyName = "InvoiceId")]
         public string InvoiceId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "InvoiceStatus")]
+        public string InvoiceStatus { get; set; }
 
         /// <summary>
         /// Validate the object.

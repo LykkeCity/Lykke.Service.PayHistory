@@ -19,5 +19,7 @@ namespace Lykke.Service.PayHistory.Core.Domain
         string DesiredAssetId { get; }
 
         string InvoiceId { get; }
+
+        string InvoiceStatus { get; }
     }
 }
