@@ -26,7 +26,7 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
         /// 'OutgoingInvoicePayment', 'IncomingInvoicePayment',
         /// 'OutgoingExchange', 'IncomingExchange', 'Withdrawal',
         /// 'CashOut'</param>
-        public HistoryOperationViewModel(HistoryOperationType type, System.DateTime createdOn, double amount, string id = default(string), string oppositeMerchantId = default(string), string assetId = default(string), string desiredAssetId = default(string), string invoiceId = default(string))
+        public HistoryOperationViewModel(HistoryOperationType type, System.DateTime createdOn, double amount, string id = default(string), string oppositeMerchantId = default(string), string assetId = default(string), string desiredAssetId = default(string), string invoiceId = default(string), string invoiceStatus = default(string))
         {
             Id = id;
             Type = type;
@@ -36,6 +36,7 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
             AssetId = assetId;
             DesiredAssetId = desiredAssetId;
             InvoiceId = invoiceId;
+            InvoiceStatus = invoiceStatus;
             CustomInit();
         }
 
@@ -86,6 +87,11 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
         /// </summary>
         [JsonProperty(PropertyName = "InvoiceId")]
         public string InvoiceId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "InvoiceStatus")]
+        public string InvoiceStatus { get; set; }
 
         /// <summary>
         /// Validate the object.
