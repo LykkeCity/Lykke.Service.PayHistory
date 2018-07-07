@@ -49,6 +49,20 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient
         Task<HttpOperationResponse<object>> GetHistoryWithHttpMessagesAsync(string merchantId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Returns history operations base info.
+        /// </summary>
+        /// <param name='invoiceId'>
+        /// Identifier of the invoice.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetHistoryByInvoiceWithHttpMessagesAsync(string invoiceId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
         /// Returns details of the history operation.
         /// </summary>
         /// <param name='merchantId'>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lykke.Service.PayHistory.Client.AutorestClient.Models;
+using System;
 
 namespace Lykke.Service.PayHistory.Client.Publisher
 {
@@ -15,10 +16,14 @@ namespace Lykke.Service.PayHistory.Client.Publisher
         decimal Amount { get; }
 
         string AssetId { get; }
-        
-        string MerchantId { get; }
+
+        string DesiredAssetId { get; }
 
         string InvoiceId { get; }
+
+        string InvoiceStatus { get; }
+
+        string MerchantId { get; }
 
         string EmployeeEmail { get; }
 

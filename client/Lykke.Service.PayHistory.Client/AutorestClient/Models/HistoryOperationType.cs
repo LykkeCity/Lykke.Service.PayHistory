@@ -30,7 +30,9 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
         [EnumMember(Value = "IncomingExchange")]
         IncomingExchange,
         [EnumMember(Value = "Withdrawal")]
-        Withdrawal
+        Withdrawal,
+        [EnumMember(Value = "CashOut")]
+        CashOut
     }
     internal static class HistoryOperationTypeEnumExtension
     {
@@ -57,6 +59,8 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
                     return "IncomingExchange";
                 case HistoryOperationType.Withdrawal:
                     return "Withdrawal";
+                case HistoryOperationType.CashOut:
+                    return "CashOut";
             }
             return null;
         }
@@ -79,6 +83,8 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
                     return HistoryOperationType.IncomingExchange;
                 case "Withdrawal":
                     return HistoryOperationType.Withdrawal;
+                case "CashOut":
+                    return HistoryOperationType.CashOut;
             }
             return null;
         }

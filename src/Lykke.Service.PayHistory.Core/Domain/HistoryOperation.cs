@@ -19,9 +19,13 @@ namespace Lykke.Service.PayHistory.Core.Domain
 
         public string AssetId { get; set; }
 
+        public string DesiredAssetId { get; set; }
+
         public string MerchantId { get; set; }
 
         public string InvoiceId { get; set; }
+
+        public string InvoiceStatus { get; set; }
 
         public string EmployeeEmail { get; set; }
 

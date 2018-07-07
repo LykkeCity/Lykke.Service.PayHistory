@@ -40,6 +40,22 @@ namespace Lykke.Service.PayHistory.Client
             CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Returns history operations base info.
+        /// </summary>
+        /// <param name="invoiceId">Identifier of the invoice.</param>
+        /// <returns>History operations.</returns>
+        IEnumerable<HistoryOperationViewModel> GetHistoryByInvoice(string invoiceId);
+
+        /// <summary>
+        /// Returns history operations base info.
+        /// </summary>
+        /// <param name="invoiceId">Identifier of the invoice.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used to cancel the work.</param>
+        /// <returns>History operations.</returns>
+        Task<IEnumerable<HistoryOperationViewModel>> GetHistoryByInvoiceAsync(string invoiceId,
+            CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
         /// Returns details of the history operation.
         /// </summary>
         /// <param name="merchantId">Identifier of the merchant.</param>
