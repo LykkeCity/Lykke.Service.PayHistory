@@ -20,6 +20,10 @@ namespace Lykke.Service.PayHistory.Models
 
         public string AssetId { get; set; }
 
+        public string DesiredAssetId { get; set; }
+
         public string InvoiceId { get; set; }
+
+        public string InvoiceStatus { get; set; }
     }
 }

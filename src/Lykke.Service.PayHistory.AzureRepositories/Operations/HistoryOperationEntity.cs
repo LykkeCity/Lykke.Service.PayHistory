@@ -36,6 +36,12 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
             set;
         }
 
+        public string InvoiceStatus
+        {
+            get;
+            set;
+        }
+
         private DateTime _createdOn;
         public DateTime CreatedOn
         {
@@ -59,6 +65,12 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
         }
 
         public string AssetId
+        {
+            get;
+            set;
+        }
+
+        public string DesiredAssetId
         {
             get;
             set;
@@ -98,17 +110,34 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
             Type = historyOperation.Type;
             OppositeMerchantId = historyOperation.OppositeMerchantId;
             InvoiceId = historyOperation.InvoiceId;
+            InvoiceStatus = historyOperation.InvoiceStatus;
             CreatedOn = historyOperation.CreatedOn;
             Amount = historyOperation.Amount;
             AssetId = historyOperation.AssetId;
+            DesiredAssetId = historyOperation.DesiredAssetId;
             EmployeeEmail = historyOperation.EmployeeEmail;
             TxHash = historyOperation.TxHash;
             Removed = false;
         }
 
         internal static string GetPartitionKey(string merchantId)
-            => merchantId;
+        {
+            if (string.IsNullOrEmpty(merchantId))
+            {
+                throw new ArgumentNullException(merchantId);
+            }
+
+            return merchantId;
+        }
+
         internal static string GetRowKey(string id)
-            => id;
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                throw new ArgumentNullException(id);
+            }
+
+            return id;
+        }
     }
 }

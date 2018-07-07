@@ -50,6 +50,40 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient
             }
 
             /// <summary>
+            /// Returns history operations base info.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='invoiceId'>
+            /// Identifier of the invoice.
+            /// </param>
+            public static object GetHistoryByInvoice(this IPayHistoryAPI operations, string invoiceId = default(string))
+            {
+                return operations.GetHistoryByInvoiceAsync(invoiceId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Returns history operations base info.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='invoiceId'>
+            /// Identifier of the invoice.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetHistoryByInvoiceAsync(this IPayHistoryAPI operations, string invoiceId = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetHistoryByInvoiceWithHttpMessagesAsync(invoiceId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// Returns details of the history operation.
             /// </summary>
             /// <param name='operations'>
