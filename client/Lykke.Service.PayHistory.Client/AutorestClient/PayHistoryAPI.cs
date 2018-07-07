@@ -4,7 +4,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Lykke.Service.PayHistory.Client.AutorestClient
+namespace Lykke.Service.PayHistory.AutorestClient
 {
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
@@ -605,9 +605,6 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient
         /// <summary>
         /// Set TxHash to the history operation.
         /// </summary>
-        /// <param name='merchantId'>
-        /// Identifier of the merchant.
-        /// </param>
         /// <param name='id'>
         /// Identifier of the history operation.
         /// </param>
@@ -629,7 +626,7 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<ErrorResponse>> SetTxHashWithHttpMessagesAsync(string merchantId = default(string), string id = default(string), string txHash = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<ErrorResponse>> SetTxHashWithHttpMessagesAsync(string id = default(string), string txHash = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -638,7 +635,6 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("merchantId", merchantId);
                 tracingParameters.Add("id", id);
                 tracingParameters.Add("txHash", txHash);
                 tracingParameters.Add("cancellationToken", cancellationToken);
@@ -648,10 +644,6 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient
             var _baseUrl = BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "api/HistoryOperation/SetTxHash").ToString();
             List<string> _queryParameters = new List<string>();
-            if (merchantId != null)
-            {
-                _queryParameters.Add(string.Format("merchantId={0}", System.Uri.EscapeDataString(merchantId)));
-            }
             if (id != null)
             {
                 _queryParameters.Add(string.Format("id={0}", System.Uri.EscapeDataString(id)));
@@ -700,7 +692,7 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
-            if ((int)_statusCode != 200 && (int)_statusCode != 400)
+            if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 if (_httpResponse.Content != null) {
@@ -744,6 +736,24 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient
                     throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
+            // Deserialize Response
+            if ((int)_statusCode == 404)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorResponse>(_responseContent, DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -754,9 +764,6 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient
         /// <summary>
         /// Mark history operation as removed
         /// </summary>
-        /// <param name='merchantId'>
-        /// Identifier of the merchant.
-        /// </param>
         /// <param name='id'>
         /// Identifier of the history operation.
         /// </param>
@@ -775,7 +782,7 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<ErrorResponse>> SetRemovedWithHttpMessagesAsync(string merchantId = default(string), string id = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<ErrorResponse>> SetRemovedWithHttpMessagesAsync(string id = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -784,7 +791,6 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("merchantId", merchantId);
                 tracingParameters.Add("id", id);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "SetRemoved", tracingParameters);
@@ -793,10 +799,6 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient
             var _baseUrl = BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "api/HistoryOperation/SetRemoved").ToString();
             List<string> _queryParameters = new List<string>();
-            if (merchantId != null)
-            {
-                _queryParameters.Add(string.Format("merchantId={0}", System.Uri.EscapeDataString(merchantId)));
-            }
             if (id != null)
             {
                 _queryParameters.Add(string.Format("id={0}", System.Uri.EscapeDataString(id)));

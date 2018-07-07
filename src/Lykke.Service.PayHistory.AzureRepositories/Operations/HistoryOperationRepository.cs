@@ -12,12 +12,16 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
     {
         private readonly INoSQLTableStorage<HistoryOperationEntity> _storage;
         private readonly INoSQLTableStorage<AzureIndex> _indexByInvoice;
+        private readonly INoSQLTableStorage<AzureIndex> _indexById;
 
-        public HistoryOperationRepository(INoSQLTableStorage<HistoryOperationEntity> storage,
-            INoSQLTableStorage<AzureIndex> indexByInvoice)
+        public HistoryOperationRepository(
+            INoSQLTableStorage<HistoryOperationEntity> storage,
+            INoSQLTableStorage<AzureIndex> indexByInvoice, 
+            INoSQLTableStorage<AzureIndex> indexById)
         {
             _storage = storage;
             _indexByInvoice = indexByInvoice;
+            _indexById = indexById;
         }
 
         public async Task<IEnumerable<IHistoryOperation>> GetAsync(string merchantId)
@@ -42,39 +46,58 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
                 HistoryOperationEntity.GetRowKey(id));
         }
 
-        public Task SetTxHashAsync(string merchantId, string id, string txHash)
+        public async Task SetTxHashAsync(string id, string txHash)
         {
-            return _storage.MergeAsync(HistoryOperationEntity.GetPartitionKey(merchantId),
-                HistoryOperationEntity.GetRowKey(id),
+            AzureIndex index =
+                await _indexById.GetDataAsync(IndexById.GeneratePartitionKey(id), IndexById.GenerateRowKey());
+
+            if (index == null)
+                throw new HistoryOperationNotFoundException(id);
+
+            HistoryOperationEntity updated = await _storage.MergeAsync(
+                index.PrimaryPartitionKey, index.PrimaryRowKey,
                 o =>
                 {
                     o.TxHash = txHash;
                     return o;
                 });
+
+            if (updated == null)
+                throw new HistoryOperationNotFoundException(id);
         }
 
         public Task InsertOrReplaceAsync(IHistoryOperation historyOperation)
         {
             var entity = new HistoryOperationEntity(historyOperation);
 
+            AzureIndex indexById = IndexById.Create(entity);
+
             if (string.IsNullOrEmpty(historyOperation.InvoiceId))
             {
-                return _storage.InsertOrReplaceAsync(entity);
+                return Task.WhenAll(
+                    _storage.InsertOrReplaceAsync(entity),
+                    _indexById.InsertOrReplaceAsync(indexById));
             }
-            else
-            {
-                AzureIndex index = IndexByInvoice.Create(entity);
 
-                return Task.WhenAll(_storage.InsertOrReplaceAsync(entity),
-                    _indexByInvoice.InsertOrReplaceAsync(index));
-            }
+            AzureIndex indexByInvoice = IndexByInvoice.Create(entity);
+
+            return Task.WhenAll(
+                _storage.InsertOrReplaceAsync(entity),
+                _indexById.InsertOrReplaceAsync(indexById),
+                _indexByInvoice.InsertOrReplaceAsync(indexByInvoice));
         }
 
-        public async Task SetRemovedAsync(string merchantId, string id)
+        public async Task SetRemovedAsync(string id)
         {
+            AzureIndex index =
+                await _indexById.GetDataAsync(IndexById.GeneratePartitionKey(id), IndexById.GenerateRowKey());
+
+            if (index == null)
+                throw new HistoryOperationNotFoundException(id);
+
             HistoryOperationEntity updated = await _storage.MergeAsync(
-                HistoryOperationEntity.GetPartitionKey(merchantId),
-                HistoryOperationEntity.GetRowKey(id),
+                index.PrimaryPartitionKey,
+                index.PrimaryRowKey,
                 o =>
                 {
                     o.Removed = true;
@@ -82,7 +105,7 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
                 });
 
             if (updated == null)
-                throw new HistoryOperationNotFoundException(merchantId, id);
+                throw new HistoryOperationNotFoundException(id);
         }
     }
 }

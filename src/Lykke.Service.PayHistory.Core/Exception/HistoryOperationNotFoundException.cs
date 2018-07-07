@@ -8,9 +8,8 @@ namespace Lykke.Service.PayHistory.Core.Exception
         {
         }
 
-        public HistoryOperationNotFoundException(string merchantId, string operationId) : base("History operation not found")
+        public HistoryOperationNotFoundException(string operationId) : base("History operation not found")
         {
-            MerchantId = merchantId;
             OperationId = operationId;
         }
 
@@ -22,7 +21,6 @@ namespace Lykke.Service.PayHistory.Core.Exception
         {
         }
 
-        public string MerchantId { get; set; }
         public string OperationId { get; set; }
     }
 }

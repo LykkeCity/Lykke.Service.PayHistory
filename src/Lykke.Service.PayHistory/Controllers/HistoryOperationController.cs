@@ -97,27 +97,41 @@ namespace Lykke.Service.PayHistory.Controllers
         /// <summary>
         /// Set TxHash to the history operation.
         /// </summary>
-        /// <param name="merchantId">Identifier of the merchant.</param>
         /// <param name="id">Identifier of the history operation.</param>
         /// <param name="txHash">TxHash of the history operation.</param>
         /// <returns code="200">Empty successful result.</returns>
         /// <returns code="400">Input arguments are invalid.</returns>
         [HttpPost]
         [SwaggerOperation("SetTxHash")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int) HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorResponse), (int) HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(ErrorResponse), (int) HttpStatusCode.NotFound)]
         public async Task<IActionResult> SetTxHash(
-            [Required, PartitionOrRowKey]string merchantId, 
-            [Required, PartitionOrRowKey]string id, string txHash)
+            [Required, PartitionOrRowKey] string id, string txHash)
         {
-            await _historyOperationService.SetTxHashAsync(merchantId, id, txHash);
-            return Ok();
+            try
+            {
+                await _historyOperationService.SetTxHashAsync(id, txHash);
+
+                return Ok();
+            }
+            catch (ArgumentNullException e)
+            {
+                _log.WriteError(nameof(SetTxHash), new {e.ParamName}, e);
+
+                return BadRequest(ErrorResponse.Create(e.Message));
+            }
+            catch (HistoryOperationNotFoundException e)
+            {
+                _log.WriteError(nameof(SetTxHash), new {e.OperationId}, e);
+
+                return NotFound(ErrorResponse.Create(e.Message));
+            }
         }
 
         /// <summary>
         /// Mark history operation as removed
         /// </summary>
-        /// <param name="merchantId">Identifier of the merchant.</param>
         /// <param name="id">Identifier of the history operation.</param>s
         /// <response code="200">Empty successful result.</response>
         /// <response code="400">Input arguments are invalid.</response>
@@ -126,14 +140,13 @@ namespace Lykke.Service.PayHistory.Controllers
         [SwaggerOperation("SetRemoved")]
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(ErrorResponse), (int) HttpStatusCode.BadRequest)]
-        [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(ErrorResponse), (int) HttpStatusCode.NotFound)]
         public async Task<IActionResult> SetRemoved(
-            [Required, PartitionOrRowKey] string merchantId,
             [Required, PartitionOrRowKey] string id)
         {
             try
             {
-                await _historyOperationService.SetRemovedAsync(merchantId, id);
+                await _historyOperationService.SetRemovedAsync(id);
 
                 return NoContent();
             }
@@ -145,11 +158,7 @@ namespace Lykke.Service.PayHistory.Controllers
             }
             catch (HistoryOperationNotFoundException e)
             {
-                _log.WriteError(nameof(SetRemoved), new
-                {
-                    e.MerchantId,
-                    e.OperationId
-                }, e);
+                _log.WriteError(nameof(SetRemoved), new {e.OperationId}, e);
 
                 return NotFound(ErrorResponse.Create(e.Message));
             }

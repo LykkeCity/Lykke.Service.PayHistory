@@ -4,7 +4,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Lykke.Service.PayHistory.Client.AutorestClient
+namespace Lykke.Service.PayHistory.AutorestClient
 {
     using Models;
     using System.Threading;
@@ -129,18 +129,15 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='merchantId'>
-            /// Identifier of the merchant.
-            /// </param>
             /// <param name='id'>
             /// Identifier of the history operation.
             /// </param>
             /// <param name='txHash'>
             /// TxHash of the history operation.
             /// </param>
-            public static ErrorResponse SetTxHash(this IPayHistoryAPI operations, string merchantId = default(string), string id = default(string), string txHash = default(string))
+            public static ErrorResponse SetTxHash(this IPayHistoryAPI operations, string id = default(string), string txHash = default(string))
             {
-                return operations.SetTxHashAsync(merchantId, id, txHash).GetAwaiter().GetResult();
+                return operations.SetTxHashAsync(id, txHash).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -148,9 +145,6 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
-            /// </param>
-            /// <param name='merchantId'>
-            /// Identifier of the merchant.
             /// </param>
             /// <param name='id'>
             /// Identifier of the history operation.
@@ -161,9 +155,9 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ErrorResponse> SetTxHashAsync(this IPayHistoryAPI operations, string merchantId = default(string), string id = default(string), string txHash = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ErrorResponse> SetTxHashAsync(this IPayHistoryAPI operations, string id = default(string), string txHash = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.SetTxHashWithHttpMessagesAsync(merchantId, id, txHash, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.SetTxHashWithHttpMessagesAsync(id, txHash, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -175,15 +169,12 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='merchantId'>
-            /// Identifier of the merchant.
-            /// </param>
             /// <param name='id'>
             /// Identifier of the history operation.
             /// </param>
-            public static ErrorResponse SetRemoved(this IPayHistoryAPI operations, string merchantId = default(string), string id = default(string))
+            public static ErrorResponse SetRemoved(this IPayHistoryAPI operations, string id = default(string))
             {
-                return operations.SetRemovedAsync(merchantId, id).GetAwaiter().GetResult();
+                return operations.SetRemovedAsync(id).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -192,18 +183,15 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='merchantId'>
-            /// Identifier of the merchant.
-            /// </param>
             /// <param name='id'>
             /// Identifier of the history operation.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ErrorResponse> SetRemovedAsync(this IPayHistoryAPI operations, string merchantId = default(string), string id = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ErrorResponse> SetRemovedAsync(this IPayHistoryAPI operations, string id = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.SetRemovedWithHttpMessagesAsync(merchantId, id, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.SetRemovedWithHttpMessagesAsync(id, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
