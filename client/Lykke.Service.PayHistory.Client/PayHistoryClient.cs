@@ -118,6 +118,30 @@ namespace Lykke.Service.PayHistory.Client
             Convert<object>(result);
         }
 
+        /// <summary>
+        /// Set Removed attribute to true
+        /// </summary>
+        /// <param name="merchantId">Identifier of the merchant.</param>
+        /// <param name="id">Identifier of the history operation.</param>
+        public void SetRemoved(string merchantId, string id)
+        {
+            var result = _service.SetRemoved(merchantId, id);
+            Convert<object>(result);
+        }
+
+        /// <summary>
+        /// Set Removed attribute to true
+        /// </summary>
+        /// <param name="merchantId">Identifier of the merchant.</param>
+        /// <param name="id">Identifier of the history operation.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used to cancel the work.</param>
+        public async Task SetRemovedAsync(string merchantId, string id,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var result = await _service.SetRemovedAsync(merchantId, id, cancellationToken);
+            Convert<object>(result);
+        }
+
         #endregion HistoryOperationController
 
         public void Dispose()

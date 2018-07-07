@@ -136,6 +136,46 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient
             }
 
             /// <summary>
+            /// Mark history operation as removed
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='merchantId'>
+            /// Identifier of the merchant.
+            /// </param>
+            /// <param name='id'>
+            /// Identifier of the history operation.
+            /// </param>
+            public static ErrorResponse SetRemoved(this IPayHistoryAPI operations, string merchantId = default(string), string id = default(string))
+            {
+                return operations.SetRemovedAsync(merchantId, id).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Mark history operation as removed
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='merchantId'>
+            /// Identifier of the merchant.
+            /// </param>
+            /// <param name='id'>
+            /// Identifier of the history operation.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<ErrorResponse> SetRemovedAsync(this IPayHistoryAPI operations, string merchantId = default(string), string id = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.SetRemovedWithHttpMessagesAsync(merchantId, id, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// Checks service is alive
             /// </summary>
             /// <param name='operations'>

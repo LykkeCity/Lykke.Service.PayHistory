@@ -75,6 +75,22 @@ namespace Lykke.Service.PayHistory.Client
         Task SetTxHashAsync(string merchantId, string id, string txHash,
             CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Set Removed attribute to true
+        /// </summary>
+        /// <param name="merchantId">Identifier of the merchant.</param>
+        /// <param name="id">Identifier of the history operation.</param>
+        void SetRemoved(string merchantId, string id);
+
+        /// <summary>
+        /// Set Removed attribute to true
+        /// </summary>
+        /// <param name="merchantId">Identifier of the merchant.</param>
+        /// <param name="id">Identifier of the history operation.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used to cancel the work.</param>
+        Task SetRemovedAsync(string merchantId, string id,
+            CancellationToken cancellationToken = default(CancellationToken));
+
         #endregion HistoryOperationController
     }
 }

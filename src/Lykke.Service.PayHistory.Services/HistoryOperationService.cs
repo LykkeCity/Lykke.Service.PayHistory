@@ -64,5 +64,20 @@ namespace Lykke.Service.PayHistory.Services
 
             return _historyOperationRepository.InsertOrReplaceAsync(historyOperation);
         }
+
+        public Task SetRemovedAsync(string merchantId, string id)
+        {
+            if (string.IsNullOrWhiteSpace(merchantId))
+            {
+                throw new ArgumentNullException(nameof(merchantId));
+            }
+
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            return _historyOperationRepository.SetRemovedAsync(merchantId, id);
+        }
     }
 }

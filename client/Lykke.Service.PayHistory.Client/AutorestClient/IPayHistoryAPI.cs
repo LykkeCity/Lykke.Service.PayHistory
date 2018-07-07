@@ -86,6 +86,23 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient
         Task<HttpOperationResponse<ErrorResponse>> SetTxHashWithHttpMessagesAsync(string merchantId = default(string), string id = default(string), string txHash = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Mark history operation as removed
+        /// </summary>
+        /// <param name='merchantId'>
+        /// Identifier of the merchant.
+        /// </param>
+        /// <param name='id'>
+        /// Identifier of the history operation.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<ErrorResponse>> SetRemovedWithHttpMessagesAsync(string merchantId = default(string), string id = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
         /// Checks service is alive
         /// </summary>
         /// <param name='customHeaders'>

@@ -9,5 +9,6 @@ namespace Lykke.Service.PayHistory.Core.Domain
         Task<IHistoryOperation> GetAsync(string merchantId, string id);
         Task SetTxHashAsync(string merchantId, string id, string txHash);
         Task InsertOrReplaceAsync(IHistoryOperation historyOperation);
+        Task SetRemovedAsync(string merchantId, string id);
     }
 }
