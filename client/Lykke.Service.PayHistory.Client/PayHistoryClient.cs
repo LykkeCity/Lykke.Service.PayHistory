@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Common.Log;
-using Lykke.Service.PayHistory.Client.AutorestClient;
-using Lykke.Service.PayHistory.Client.AutorestClient.Models;
+using Lykke.Service.PayHistory.AutorestClient;
+using Lykke.Service.PayHistory.AutorestClient.Models;
 using Lykke.Service.PayHistory.Client.Models;
 
 namespace Lykke.Service.PayHistory.Client
@@ -119,50 +119,46 @@ namespace Lykke.Service.PayHistory.Client
         /// <summary>
         /// Set TxHash to the history operation.
         /// </summary>
-        /// <param name="merchantId">Identifier of the merchant.</param>
         /// <param name="id">Identifier of the history operation.</param>
         /// <param name="txHash">TxHash of the history operation.</param>
-        public void SetTxHash(string merchantId, string id, string txHash)
+        public void SetTxHash(string id, string txHash)
         {
-            var result = _service.SetTxHash(merchantId, id, txHash);
+            var result = _service.SetTxHash(id, txHash);
             Convert<object>(result);
         }
 
         /// <summary>
         /// Set TxHash to the history operation.
         /// </summary>
-        /// <param name="merchantId">Identifier of the merchant.</param>
         /// <param name="id">Identifier of the history operation.</param>
         /// <param name="txHash">TxHash of the history operation.</param>
         /// <param name="cancellationToken">A cancellation token that can be used to cancel the work.</param>
-        public async Task SetTxHashAsync(string merchantId, string id, string txHash,
+        public async Task SetTxHashAsync(string id, string txHash,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var result = await _service.SetTxHashAsync(merchantId, id, txHash, cancellationToken);
+            var result = await _service.SetTxHashAsync(id, txHash, cancellationToken);
             Convert<object>(result);
         }
 
         /// <summary>
         /// Set Removed attribute to true
         /// </summary>
-        /// <param name="merchantId">Identifier of the merchant.</param>
         /// <param name="id">Identifier of the history operation.</param>
-        public void SetRemoved(string merchantId, string id)
+        public void SetRemoved(string id)
         {
-            var result = _service.SetRemoved(merchantId, id);
+            var result = _service.SetRemoved(id);
             Convert<object>(result);
         }
 
         /// <summary>
         /// Set Removed attribute to true
         /// </summary>
-        /// <param name="merchantId">Identifier of the merchant.</param>
         /// <param name="id">Identifier of the history operation.</param>
         /// <param name="cancellationToken">A cancellation token that can be used to cancel the work.</param>
-        public async Task SetRemovedAsync(string merchantId, string id,
+        public async Task SetRemovedAsync(string id,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var result = await _service.SetRemovedAsync(merchantId, id, cancellationToken);
+            var result = await _service.SetRemovedAsync(id, cancellationToken);
             Convert<object>(result);
         }
 

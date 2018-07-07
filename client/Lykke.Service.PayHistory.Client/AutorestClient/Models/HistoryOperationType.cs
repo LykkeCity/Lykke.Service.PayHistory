@@ -4,7 +4,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
+namespace Lykke.Service.PayHistory.AutorestClient.Models
 {
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;

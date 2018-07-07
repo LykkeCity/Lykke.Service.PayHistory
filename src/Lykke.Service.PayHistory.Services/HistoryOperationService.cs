@@ -53,19 +53,14 @@ namespace Lykke.Service.PayHistory.Services
             return _historyOperationRepository.GetAsync(merchantId, id);
         }
 
-        public Task SetTxHashAsync(string merchantId, string id, string txHash)
+        public Task SetTxHashAsync(string id, string txHash)
         {
-            if (string.IsNullOrWhiteSpace(merchantId))
-            {
-                throw new ArgumentNullException(nameof(merchantId));
-            }
-
             if (string.IsNullOrWhiteSpace(id))
             {
                 throw new ArgumentNullException(nameof(id));
             }
 
-            return _historyOperationRepository.SetTxHashAsync(merchantId, id, txHash);
+            return _historyOperationRepository.SetTxHashAsync(id, txHash);
         }
 
         public Task AddAsync(IHistoryOperation historyOperation)
@@ -78,19 +73,14 @@ namespace Lykke.Service.PayHistory.Services
             return _historyOperationRepository.InsertOrReplaceAsync(historyOperation);
         }
 
-        public Task SetRemovedAsync(string merchantId, string id)
+        public Task SetRemovedAsync(string id)
         {
-            if (string.IsNullOrWhiteSpace(merchantId))
-            {
-                throw new ArgumentNullException(nameof(merchantId));
-            }
-
             if (string.IsNullOrWhiteSpace(id))
             {
                 throw new ArgumentNullException(nameof(id));
             }
 
-            return _historyOperationRepository.SetRemovedAsync(merchantId, id);
+            return _historyOperationRepository.SetRemovedAsync(id);
         }
     }
 }

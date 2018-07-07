@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Converters;
 using System;
 using System.ComponentModel.DataAnnotations;
-using Lykke.Service.PayHistory.Client.AutorestClient.Models;
+using Lykke.Service.PayHistory.AutorestClient.Models;
 
 namespace Lykke.Service.PayHistory.Client.Publisher
 {
