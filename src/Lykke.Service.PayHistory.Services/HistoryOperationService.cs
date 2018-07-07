@@ -1,6 +1,7 @@
 ﻿using Lykke.Service.PayHistory.Core.Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Lykke.Service.PayHistory.Core.Services;
 
@@ -22,7 +23,19 @@ namespace Lykke.Service.PayHistory.Services
                 throw new ArgumentNullException(nameof(merchantId));
             }
 
-            return await _historyOperationRepository.GetAsync(merchantId);
+            var results = await _historyOperationRepository.GetAsync(merchantId);
+            return results.OrderByDescending(o => o.CreatedOn);
+        }
+
+        public async Task<IEnumerable<IHistoryOperation>> GetHistoryByInvoiceAsync(string invoiceId)
+        {
+            if (string.IsNullOrWhiteSpace(invoiceId))
+            {
+                throw new ArgumentNullException(nameof(invoiceId));
+            }
+
+            var result = await _historyOperationRepository.GetByInvoiceAsync(invoiceId);
+            return result.OrderByDescending(o => o.CreatedOn);
         }
 
         public Task<IHistoryOperation> GetDetailsAsync(string merchantId, string id)

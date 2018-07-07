@@ -24,8 +24,9 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
         /// </summary>
         /// <param name="type">Possible values include: 'None', 'Recharge',
         /// 'OutgoingInvoicePayment', 'IncomingInvoicePayment',
-        /// 'OutgoingExchange', 'IncomingExchange', 'Withdrawal'</param>
-        public HistoryOperationViewModel(HistoryOperationType type, System.DateTime createdOn, double amount, string id = default(string), string oppositeMerchantId = default(string), string assetId = default(string), string invoiceId = default(string))
+        /// 'OutgoingExchange', 'IncomingExchange', 'Withdrawal',
+        /// 'CashOut'</param>
+        public HistoryOperationViewModel(HistoryOperationType type, System.DateTime createdOn, double amount, string id = default(string), string oppositeMerchantId = default(string), string assetId = default(string), string desiredAssetId = default(string), string invoiceId = default(string))
         {
             Id = id;
             Type = type;
@@ -33,6 +34,7 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
             CreatedOn = createdOn;
             Amount = amount;
             AssetId = assetId;
+            DesiredAssetId = desiredAssetId;
             InvoiceId = invoiceId;
             CustomInit();
         }
@@ -50,7 +52,7 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
         /// <summary>
         /// Gets or sets possible values include: 'None', 'Recharge',
         /// 'OutgoingInvoicePayment', 'IncomingInvoicePayment',
-        /// 'OutgoingExchange', 'IncomingExchange', 'Withdrawal'
+        /// 'OutgoingExchange', 'IncomingExchange', 'Withdrawal', 'CashOut'
         /// </summary>
         [JsonProperty(PropertyName = "Type")]
         public HistoryOperationType Type { get; set; }
@@ -74,6 +76,11 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
         /// </summary>
         [JsonProperty(PropertyName = "AssetId")]
         public string AssetId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "DesiredAssetId")]
+        public string DesiredAssetId { get; set; }
 
         /// <summary>
         /// </summary>

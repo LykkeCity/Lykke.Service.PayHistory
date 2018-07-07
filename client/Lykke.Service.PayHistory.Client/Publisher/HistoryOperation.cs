@@ -1,7 +1,8 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System;
+using System.ComponentModel.DataAnnotations;
+using Lykke.Service.PayHistory.Client.AutorestClient.Models;
 
 namespace Lykke.Service.PayHistory.Client.Publisher
 {
@@ -32,6 +33,8 @@ namespace Lykke.Service.PayHistory.Client.Publisher
 
         [Required]
         public string AssetId { get; set; }
+
+        public string DesiredAssetId { get; set; }
 
         [Required, PartitionOrRowKey]
         public string MerchantId { get; set; }
