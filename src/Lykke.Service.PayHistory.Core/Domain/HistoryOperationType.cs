@@ -10,6 +10,5 @@
         IncomingExchange = 5,
         Withdrawal = 6,
         CashOut = 7
-
     }
 }

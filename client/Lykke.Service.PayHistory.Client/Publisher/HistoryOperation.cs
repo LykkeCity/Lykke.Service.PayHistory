@@ -41,6 +41,8 @@ namespace Lykke.Service.PayHistory.Client.Publisher
 
         public string InvoiceId { get; set; }
 
+        public string InvoiceStatus { get; set; }
+
         public string EmployeeEmail { get; set; }
 
         public string TxHash { get; set; }
