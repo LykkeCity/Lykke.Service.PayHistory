@@ -88,6 +88,17 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
             set;
         }
 
+        private bool? _removed;
+        public bool Removed
+        {
+            get => _removed ?? false;
+            set
+            {
+                _removed = value;
+                MarkValueTypePropertyAsDirty(nameof(Removed));
+            }
+        }
+
         public HistoryOperationEntity()
         {
         }
@@ -106,6 +117,7 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
             DesiredAssetId = historyOperation.DesiredAssetId;
             EmployeeEmail = historyOperation.EmployeeEmail;
             TxHash = historyOperation.TxHash;
+            Removed = false;
         }
 
         internal static string GetPartitionKey(string merchantId)

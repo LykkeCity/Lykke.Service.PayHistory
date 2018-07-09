@@ -45,6 +45,9 @@ namespace Lykke.Service.PayHistory.Modules
                         _appSettings.CurrentValue.PayHistoryService.Db.OperationsTableName, _log),
                     AzureTableStorage<AzureIndex>.Create(
                         _appSettings.ConnectionString(x => x.PayHistoryService.Db.DataConnString),
+                        _appSettings.CurrentValue.PayHistoryService.Db.OperationsTableName, _log),
+                    AzureTableStorage<AzureIndex>.Create(
+                        _appSettings.ConnectionString(x => x.PayHistoryService.Db.DataConnString),
                         _appSettings.CurrentValue.PayHistoryService.Db.OperationsTableName, _log)));
 
             builder.RegisterType<HistoryOperationService>()

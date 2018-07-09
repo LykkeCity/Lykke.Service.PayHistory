@@ -4,7 +4,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Lykke.Service.PayHistory.Client.AutorestClient
+namespace Lykke.Service.PayHistory.AutorestClient
 {
     using Microsoft.Rest;
     using Models;
@@ -82,9 +82,6 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient
         /// <summary>
         /// Set TxHash to the history operation.
         /// </summary>
-        /// <param name='merchantId'>
-        /// Identifier of the merchant.
-        /// </param>
         /// <param name='id'>
         /// Identifier of the history operation.
         /// </param>
@@ -97,7 +94,21 @@ namespace Lykke.Service.PayHistory.Client.AutorestClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<ErrorResponse>> SetTxHashWithHttpMessagesAsync(string merchantId = default(string), string id = default(string), string txHash = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<ErrorResponse>> SetTxHashWithHttpMessagesAsync(string id = default(string), string txHash = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Mark history operation as removed
+        /// </summary>
+        /// <param name='id'>
+        /// Identifier of the history operation.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<ErrorResponse>> SetRemovedWithHttpMessagesAsync(string id = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Checks service is alive

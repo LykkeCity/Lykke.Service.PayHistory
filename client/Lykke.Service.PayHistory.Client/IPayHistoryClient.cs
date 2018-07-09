@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Lykke.Service.PayHistory.Client.AutorestClient.Models;
+using Lykke.Service.PayHistory.AutorestClient.Models;
 
 namespace Lykke.Service.PayHistory.Client
 {
@@ -76,19 +76,31 @@ namespace Lykke.Service.PayHistory.Client
         /// <summary>
         /// Set TxHash to the history operation.
         /// </summary>
-        /// <param name="merchantId">Identifier of the merchant.</param>
         /// <param name="id">Identifier of the history operation.</param>
         /// <param name="txHash">TxHash of the history operation.</param>
-        void SetTxHash(string merchantId, string id, string txHash);
+        void SetTxHash(string id, string txHash);
 
         /// <summary>
         /// Set TxHash to the history operation.
         /// </summary>
-        /// <param name="merchantId">Identifier of the merchant.</param>
         /// <param name="id">Identifier of the history operation.</param>
         /// <param name="txHash">TxHash of the history operation.</param>
         /// <param name="cancellationToken">A cancellation token that can be used to cancel the work.</param>
-        Task SetTxHashAsync(string merchantId, string id, string txHash,
+        Task SetTxHashAsync(string id, string txHash,
+            CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Set Removed attribute to true
+        /// </summary>
+        /// <param name="id">Identifier of the history operation.</param>
+        void SetRemoved(string id);
+
+        /// <summary>
+        /// Set Removed attribute to true
+        /// </summary>
+        /// <param name="id">Identifier of the history operation.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used to cancel the work.</param>
+        Task SetRemovedAsync(string id,
             CancellationToken cancellationToken = default(CancellationToken));
 
         #endregion HistoryOperationController
