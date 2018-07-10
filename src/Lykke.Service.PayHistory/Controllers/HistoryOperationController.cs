@@ -12,6 +12,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Threading.Tasks;
 using Common.Log;
+using Lykke.Common.Log;
 using Lykke.Service.PayHistory.Core.Exception;
 
 namespace Lykke.Service.PayHistory.Controllers
@@ -25,11 +26,11 @@ namespace Lykke.Service.PayHistory.Controllers
         private readonly ILog _log;
 
         public HistoryOperationController(IHistoryOperationService historyOperationService,
-            IMapper mapper, ILog log)
+            IMapper mapper, ILogFactory logFactory)
         {
             _historyOperationService = historyOperationService;
             _mapper = mapper;
-            _log = log;
+            _log = logFactory.CreateLog(this);
         }
 
         /// <summary>
@@ -117,13 +118,13 @@ namespace Lykke.Service.PayHistory.Controllers
             }
             catch (ArgumentNullException e)
             {
-                _log.WriteError(nameof(SetTxHash), new {e.ParamName}, e);
+                _log.Error(e);
 
                 return BadRequest(ErrorResponse.Create(e.Message));
             }
             catch (HistoryOperationNotFoundException e)
             {
-                _log.WriteError(nameof(SetTxHash), new {e.OperationId}, e);
+                _log.Error(e);
 
                 return NotFound(ErrorResponse.Create(e.Message));
             }
@@ -152,13 +153,13 @@ namespace Lykke.Service.PayHistory.Controllers
             }
             catch (ArgumentNullException e)
             {
-                _log.WriteError(nameof(SetRemoved), new {e.ParamName}, e);
+                _log.Error(e);
 
                 return BadRequest(ErrorResponse.Create(e.Message));
             }
             catch (HistoryOperationNotFoundException e)
             {
-                _log.WriteError(nameof(SetRemoved), new {e.OperationId}, e);
+                _log.Error(e);
 
                 return NotFound(ErrorResponse.Create(e.Message));
             }
