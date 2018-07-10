@@ -1,22 +1,19 @@
-﻿using System;
+﻿using Lykke.Service.PayHistory.AutorestClient;
+using Lykke.Service.PayHistory.AutorestClient.Models;
+using Lykke.Service.PayHistory.Client.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Common.Log;
-using Lykke.Service.PayHistory.AutorestClient;
-using Lykke.Service.PayHistory.AutorestClient.Models;
-using Lykke.Service.PayHistory.Client.Models;
 
 namespace Lykke.Service.PayHistory.Client
 {
     public class PayHistoryClient : IPayHistoryClient, IDisposable
     {
-        private readonly ILog _log;
         private readonly IPayHistoryAPI _service;
         
-        public PayHistoryClient(string serviceUrl, ILog log)
+        public PayHistoryClient(string serviceUrl)
         {
-            _log = log;
             _service = new PayHistoryAPI(new Uri(serviceUrl));
         }
 
