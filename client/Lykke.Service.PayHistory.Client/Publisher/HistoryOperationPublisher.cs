@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Autofac;
@@ -7,6 +8,7 @@ using Common.Log;
 using Lykke.RabbitMqBroker.Publisher;
 using Lykke.RabbitMqBroker.Subscriber;
 using System.Threading.Tasks;
+using Lykke.Common.Log;
 using Lykke.Service.PayHistory.Client.Models;
 
 namespace Lykke.Service.PayHistory.Client.Publisher
@@ -15,25 +17,45 @@ namespace Lykke.Service.PayHistory.Client.Publisher
     {
         private readonly RabbitMqPublisherSettings _settings;
         private readonly ILog _log;
+        private readonly ILogFactory _logFactory;
         private RabbitMqPublisher<IHistoryOperation> _publisher;
 
+        [Obsolete]
         public HistoryOperationPublisher(RabbitMqPublisherSettings settings, ILog log)
         {
             _settings = settings;
             _log = log;
         }
 
+        public HistoryOperationPublisher(RabbitMqPublisherSettings settings, 
+            ILogFactory logFactory)
+        {
+            _settings = settings;
+            _logFactory = logFactory;
+            _log = logFactory.CreateLog(this);
+        }
+
         public void Start()
         {
-            var settings = RabbitMqSubscriptionSettings.CreateForPublisher(_settings.ConnectionString, _settings.ExchangeName);
+            var settings = RabbitMqSubscriptionSettings.CreateForPublisher(
+                _settings.ConnectionString, _settings.ExchangeName);
             settings.MakeDurable();
 
-            _publisher = new RabbitMqPublisher<IHistoryOperation>(settings)
-                .DisableInMemoryQueuePersistence()
+            if (_logFactory == null)
+            {
+                _publisher = new RabbitMqPublisher<IHistoryOperation>(settings)
+                    .SetConsole(new LogToConsole())
+                    .SetLogger(_log);
+            }
+            else
+            {
+                _publisher = new RabbitMqPublisher<IHistoryOperation>(_logFactory, settings);
+            }
+
+            _publisher.DisableInMemoryQueuePersistence()
+                .PublishSynchronously()
                 .SetSerializer(new JsonMessageSerializer<IHistoryOperation>())
                 .SetPublishStrategy(new DefaultFanoutPublishStrategy(settings))
-                .SetConsole(new LogToConsole())
-                .SetLogger(_log)
                 .Start();
         }
 
@@ -41,9 +63,9 @@ namespace Lykke.Service.PayHistory.Client.Publisher
         {
             Validate(historyOperation);
 
-            await Task.WhenAll(_publisher.ProduceAsync(historyOperation),
-                _log.WriteInfoAsync(nameof(HistoryOperationPublisher), nameof(PublishAsync),
-                    historyOperation.ToJson()));
+            await _publisher.ProduceAsync(historyOperation);
+
+            _log.Info("Pay history operation is published.", historyOperation.ToJson());
         }
 
 
