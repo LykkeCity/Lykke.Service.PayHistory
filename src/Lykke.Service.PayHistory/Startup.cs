@@ -18,7 +18,7 @@ namespace Lykke.Service.PayHistory
                 options.ApiTitle = "PayHistory API";
                 options.Logs = logs =>
                 {
-                    logs.AzureTableName = "PayPushNotificationsLog";
+                    logs.AzureTableName = "PayHistoryLog";
                     logs.AzureTableConnectionStringResolver = settings => settings.PayHistoryService.Db.LogsConnString;
 
                     // TODO: You could add extended logging configuration here:
@@ -26,7 +26,7 @@ namespace Lykke.Service.PayHistory
                     logs.Extended = extendedLogs =>
                     {
                         // For example, you could add additional slack channel like this:
-                        extendedLogs.AddAdditionalSlackChannel("PayPushNotifications", channelOptions =>
+                        extendedLogs.AddAdditionalSlackChannel("PayHistory", channelOptions =>
                         {
                             channelOptions.MinLogLevel = LogLevel.Information;
                         });
