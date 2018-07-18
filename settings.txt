@@ -1,0 +1,24 @@
+{
+	"PayHistoryService": {
+		"Db": {
+			"LogsConnString": "${LogsConnString}:[AzureTableStorage]",
+			"DataConnString": "${PayHistoryService-DataConnString}:[AzureTableStorage]",
+			"OperationsTableName": "Operations"
+		},
+		"Rabbit": {
+			"ConnectionString": "${GeneralRabbitMqConnectionString}:[RabbitMq]",
+			"ExchangeName": "lykke.payhistory.operations",
+			"QueueName": "repository"
+		}
+	},
+	"SlackNotifications": {
+		"AzureQueue": {
+			"ConnectionString": "${SlackNotificationsConnString}:[AzureTableStorage]",
+			"QueueName": "slack-notifications"
+		},
+		"ThrottlingLimitSeconds": ${SlackNotificationsThrottlingLimit}
+	},
+	"MonitoringServiceClient": {
+		"MonitoringServiceUrl": "${MonitoringServiceUrl}"
+	}
+}
