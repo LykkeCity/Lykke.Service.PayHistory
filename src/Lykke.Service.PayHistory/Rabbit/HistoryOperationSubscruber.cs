@@ -7,6 +7,7 @@ using Lykke.Service.PayHistory.Core.Domain;
 using Lykke.Service.PayHistory.Settings.ServiceSettings;
 using System;
 using System.Threading.Tasks;
+using Lykke.Common.Log;
 using Lykke.Service.PayHistory.Core.Services;
 
 namespace Lykke.Service.PayHistory.Rabbit
@@ -15,15 +16,17 @@ namespace Lykke.Service.PayHistory.Rabbit
     {
         private RabbitMqSubscriber<HistoryOperation> _subscriber;
         private readonly RabbitMqSubscriberSettings _settings;
+        private readonly ILogFactory _logFactory;
         private readonly ILog _log;
         private readonly IHistoryOperationService _historyOperationService;
 
         public HistoryOperationSubscruber(IHistoryOperationService historyOperationService,
-            RabbitMqSubscriberSettings settings, ILog log)
+            RabbitMqSubscriberSettings settings, ILogFactory logFactory)
         {
             _historyOperationService = historyOperationService;
             _settings = settings;
-            _log = log;
+            _logFactory = logFactory;
+            _log = logFactory.CreateLog(this);
         }
 
         public void Start()
@@ -36,22 +39,20 @@ namespace Lykke.Service.PayHistory.Rabbit
                 IsDurable = true
             };
 
-            var errorHandlingStrategy = new ResilientErrorHandlingStrategy(_log, settings,
+            var errorHandlingStrategy = new ResilientErrorHandlingStrategy(_logFactory, 
+                settings,
                 retryTimeout: TimeSpan.FromSeconds(10),
-                next: new DeadQueueErrorHandlingStrategy(_log, settings));
+                next: new DeadQueueErrorHandlingStrategy(_logFactory, settings));
 
-            _subscriber = new RabbitMqSubscriber<HistoryOperation>(settings,
+            _subscriber = new RabbitMqSubscriber<HistoryOperation>(_logFactory, settings,
                     errorHandlingStrategy)
                 .SetMessageDeserializer(new JsonMessageDeserializer<HistoryOperation>())
                 .SetMessageReadStrategy(new MessageReadQueueStrategy())
                 .Subscribe(ProcessMessageAsync)
                 .CreateDefaultBinding()
-                .SetLogger(_log)
                 .Start();
 
-            _log.WriteInfo(nameof(HistoryOperationSubscruber),
-                nameof(Start),
-                $"<< {nameof(HistoryOperationSubscruber)} is started.");
+            _log.Info($"<< {nameof(HistoryOperationSubscruber)} is started.");
         }
 
         private Task ProcessMessageAsync(HistoryOperation historyOperation)
@@ -63,9 +64,7 @@ namespace Lykke.Service.PayHistory.Rabbit
         {
             _subscriber?.Stop();
 
-            _log.WriteInfo(nameof(HistoryOperationSubscruber),
-                nameof(Stop),
-                $"<< {nameof(HistoryOperationSubscruber)} is stopped.");
+            _log.Info($"<< {nameof(HistoryOperationSubscruber)} is stopped.");
         }
 
         public void Dispose()
