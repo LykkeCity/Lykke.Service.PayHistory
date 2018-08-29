@@ -1,0 +1,32 @@
+PayHistoryService: 
+    Db:
+        LogsConnString:
+            settings-key: PayHistoryService-LogsConnString
+            types: [ AzureTableStorage, Tag ]
+        DataConnString: 
+            settings-key: PayHistoryService-DataConnString
+            types: [ AzureTableStorage, Tag ]
+        OperationsTableName: Operations
+    Rabbit:
+        ConnectionString: 
+            settings-key: GeneralRabbitMqConnectionString
+            types: [ RabbitMq, Tag ]
+        ExchangeName: 
+            settings-key: PayHistoryService-ExchangeName
+            types: [ Tag ]
+        QueueName: 
+            settings-key: PayHistoryService-QueueName
+            types: [ Tag ]
+
+MonitoringServiceClient:
+  MonitoringServiceUrl:
+    settings-key: MonitoringServiceUrl
+
+SlackNotifications:
+  AzureQueue:
+    ConnectionString:
+      settings-key: SlackNotificationsConnString
+      types: [ AzureTableStorage ]
+    QueueName:
+      settings-key: SlackQueueName
+      types: [ AzureTableStorage ]
