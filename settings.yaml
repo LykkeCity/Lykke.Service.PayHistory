@@ -1,15 +1,15 @@
 PayHistoryService: 
     Db:
         LogsConnString:
-            settings-key: PayHistoryService-LogsConnString
+            settings-key: LykkePayLogsConnString
             types: [ AzureTableStorage, Tag ]
         DataConnString: 
-            settings-key: PayHistoryService-DataConnString
+            settings-key: LykkePayDataConnString
             types: [ AzureTableStorage, Tag ]
         OperationsTableName: Operations
     Rabbit:
         ConnectionString: 
-            settings-key: GeneralRabbitMqConnectionString
+            settings-key: RabbitPay
             types: [ RabbitMq, Tag ]
         ExchangeName: 
             settings-key: PayHistoryService-ExchangeName
