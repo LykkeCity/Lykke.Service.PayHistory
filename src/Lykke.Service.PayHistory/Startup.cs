@@ -10,12 +10,19 @@ namespace Lykke.Service.PayHistory
     [UsedImplicitly]
     public class Startup
     {
+        private readonly LykkeSwaggerOptions _swaggerOptions = new LykkeSwaggerOptions
+        {
+            ApiTitle = "PayHistory API",
+            ApiVersion = "v1"
+        };
+
         [UsedImplicitly]
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             return services.BuildServiceProvider<AppSettings>(options =>
             {
-                options.ApiTitle = "PayHistory API";
+                options.SwaggerOptions = _swaggerOptions;
+
                 options.Logs = logs =>
                 {
                     logs.AzureTableName = "PayHistoryLog";
@@ -46,7 +53,23 @@ namespace Lykke.Service.PayHistory
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseLykkeConfiguration();
+            app.UseLykkeConfiguration(options =>
+            {
+                options.SwaggerOptions = _swaggerOptions;
+
+                // TODO: Configure additional middleware for eg authentication or maintenancemode checks
+                /*
+                options.WithMiddleware = x =>
+                {
+                    x.UseMaintenanceMode<AppSettings>(settings => new MaintenanceMode
+                    {
+                        Enabled = settings.MaintenanceMode?.Enabled ?? false,
+                        Reason = settings.MaintenanceMode?.Reason
+                    });
+                    x.UseAuthentication();
+                };
+                */
+            });
         }
     }
 }

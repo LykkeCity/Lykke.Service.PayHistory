@@ -1,0 +1,32 @@
+PayHistoryService: 
+    Db:
+        LogsConnString:
+            settings-key: LykkePayLogsConnString
+            types: [ AzureTableStorage, Tag ]
+        DataConnString: 
+            settings-key: LykkePayDataConnString
+            types: [ AzureTableStorage, Tag ]
+        OperationsTableName: Operations
+    Rabbit:
+        ConnectionString: 
+            settings-key: RabbitPay
+            types: [ RabbitMq, Tag ]
+        ExchangeName: 
+            settings-key: PayHistoryService-ExchangeName
+            types: [ Tag ]
+        QueueName: 
+            settings-key: PayHistoryService-QueueName
+            types: [ Tag ]
+
+MonitoringServiceClient:
+  MonitoringServiceUrl:
+    settings-key: MonitoringServiceUrl
+
+SlackNotifications:
+  AzureQueue:
+    ConnectionString:
+      settings-key: SlackNotificationsConnString
+      types: [ AzureTableStorage ]
+    QueueName:
+      settings-key: SlackQueueName
+      types: [ AzureTableStorage ]
