@@ -6,7 +6,7 @@ PayHistoryService:
     DataConnString: 
       settings-key: LykkePayDataConnString
       types: [ AzureTableStorage, Tag ]
-    OperationsTableName: Operations
+    OperationsTableName: PayHistoryOperations
   Rabbit:
     ConnectionString: 
       settings-key: RabbitPay
