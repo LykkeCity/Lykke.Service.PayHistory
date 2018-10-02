@@ -1,9 +1,9 @@
 ﻿using Lykke.Service.PayHistory.Core.Domain;
+using Lykke.Service.PayHistory.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Lykke.Service.PayHistory.Core.Services;
 
 namespace Lykke.Service.PayHistory.Services
 {
@@ -23,8 +23,8 @@ namespace Lykke.Service.PayHistory.Services
                 throw new ArgumentNullException(nameof(merchantId));
             }
 
-            var results = await _historyOperationRepository.GetAsync(merchantId);
-            return results.OrderByDescending(o => o.CreatedOn);
+            return await _historyOperationRepository.GetByMerchantOrderedByCreatedOnDescAsync(
+                merchantId);
         }
 
         public async Task<IEnumerable<IHistoryOperation>> GetHistoryByInvoiceAsync(string invoiceId)
@@ -34,23 +34,18 @@ namespace Lykke.Service.PayHistory.Services
                 throw new ArgumentNullException(nameof(invoiceId));
             }
 
-            var result = await _historyOperationRepository.GetByInvoiceAsync(invoiceId);
-            return result.OrderByDescending(o => o.CreatedOn);
+            return (await _historyOperationRepository.GetByInvoiceAsync(
+                invoiceId)).OrderByDescending(o=>o.CreatedOn);
         }
 
-        public Task<IHistoryOperation> GetDetailsAsync(string merchantId, string id)
+        public Task<IHistoryOperation> GetDetailsAsync(string id)
         {
-            if (string.IsNullOrWhiteSpace(merchantId))
-            {
-                throw new ArgumentNullException(nameof(merchantId));
-            }
-
             if (string.IsNullOrWhiteSpace(id))
             {
                 throw new ArgumentNullException(nameof(id));
             }
 
-            return _historyOperationRepository.GetAsync(merchantId, id);
+            return _historyOperationRepository.GetAsync(id);
         }
 
         public Task SetTxHashAsync(string id, string txHash)

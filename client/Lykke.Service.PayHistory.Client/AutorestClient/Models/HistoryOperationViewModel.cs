@@ -4,8 +4,9 @@
 // regenerated.
 // </auto-generated>
 
-namespace Lykke.Service.PayHistory.AutorestClient.Models
+namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -26,7 +27,7 @@ namespace Lykke.Service.PayHistory.AutorestClient.Models
         /// 'OutgoingInvoicePayment', 'IncomingInvoicePayment',
         /// 'OutgoingExchange', 'IncomingExchange', 'Withdrawal',
         /// 'CashOut'</param>
-        public HistoryOperationViewModel(HistoryOperationType type, System.DateTime createdOn, double amount, string id = default(string), string oppositeMerchantId = default(string), string assetId = default(string), string desiredAssetId = default(string), string invoiceId = default(string), string invoiceStatus = default(string))
+        public HistoryOperationViewModel(string id, HistoryOperationType type, string oppositeMerchantId, System.DateTime createdOn, double amount, string assetId, string desiredAssetId, string invoiceId, string invoiceStatus)
         {
             Id = id;
             Type = type;
@@ -96,11 +97,35 @@ namespace Lykke.Service.PayHistory.AutorestClient.Models
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
+            if (Id == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "Id");
+            }
+            if (OppositeMerchantId == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "OppositeMerchantId");
+            }
+            if (AssetId == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "AssetId");
+            }
+            if (DesiredAssetId == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "DesiredAssetId");
+            }
+            if (InvoiceId == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "InvoiceId");
+            }
+            if (InvoiceStatus == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "InvoiceStatus");
+            }
         }
     }
 }

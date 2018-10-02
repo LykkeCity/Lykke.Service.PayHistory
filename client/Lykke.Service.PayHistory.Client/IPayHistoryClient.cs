@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Lykke.Service.PayHistory.Client.AutorestClient.Models;
+using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Lykke.Service.PayHistory.AutorestClient.Models;
 
 namespace Lykke.Service.PayHistory.Client
 {
@@ -58,19 +59,17 @@ namespace Lykke.Service.PayHistory.Client
         /// <summary>
         /// Returns details of the history operation.
         /// </summary>
-        /// <param name="merchantId">Identifier of the merchant.</param>
         /// <param name="id">Identifier of the history operation.</param>
         /// <returns>Details of the history operation.</returns>
-        HistoryOperationModel GetDetails(string merchantId, string id);
+        HistoryOperationModel GetDetails(string id);
 
         /// <summary>
         /// Returns details of the history operation.
         /// </summary>
-        /// <param name="merchantId">Identifier of the merchant.</param>
         /// <param name="id">Identifier of the history operation.</param>
         /// <param name="cancellationToken">A cancellation token that can be used to cancel the work.</param>
         /// <returns>Details of the history operation.</returns>
-        Task<HistoryOperationModel> GetDetailsAsync(string merchantId, string id,
+        Task<HistoryOperationModel> GetDetailsAsync(string id,
             CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>

@@ -8,7 +8,7 @@ namespace Lykke.Service.PayHistory.Core.Services
     {
         Task<IEnumerable<IHistoryOperationView>> GetHistoryAsync(string merchantId);
         Task<IEnumerable<IHistoryOperation>> GetHistoryByInvoiceAsync(string invoiceId);
-        Task<IHistoryOperation> GetDetailsAsync(string merchantId, string id);
+        Task<IHistoryOperation> GetDetailsAsync(string id);
         Task SetTxHashAsync(string id, string txHash);
         Task AddAsync(IHistoryOperation historyOperation);
         Task SetRemovedAsync(string id);

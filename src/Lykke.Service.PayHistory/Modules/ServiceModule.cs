@@ -5,6 +5,7 @@ using AzureStorage.Tables.Templates.Index;
 using Common;
 using Lykke.Common.Log;
 using Lykke.Service.PayHistory.AzureRepositories.Operations;
+using Lykke.Service.PayHistory.AzureRepositories.Operations.Migration;
 using Lykke.Service.PayHistory.Core.Domain;
 using Lykke.Service.PayHistory.Core.Services;
 using Lykke.Service.PayHistory.Rabbit;
@@ -35,17 +36,29 @@ namespace Lykke.Service.PayHistory.Modules
                 new HistoryOperationRepository(
                     AzureTableStorage<HistoryOperationEntity>.Create(
                         _appSettings.ConnectionString(x => x.PayHistoryService.Db.DataConnString),
-                        _appSettings.CurrentValue.PayHistoryService.Db.OperationsTableName,
+                        _appSettings.CurrentValue.PayHistoryService.Db.OrderedOperationsTableName,
                         c.Resolve<ILogFactory>()),
                     AzureTableStorage<AzureIndex>.Create(
                         _appSettings.ConnectionString(x => x.PayHistoryService.Db.DataConnString),
-                        _appSettings.CurrentValue.PayHistoryService.Db.OperationsTableName,
+                        _appSettings.CurrentValue.PayHistoryService.Db.OrderedOperationsTableName,
                         c.Resolve<ILogFactory>()),
                     AzureTableStorage<AzureIndex>.Create(
                         _appSettings.ConnectionString(x => x.PayHistoryService.Db.DataConnString),
-                        _appSettings.CurrentValue.PayHistoryService.Db.OperationsTableName,
+                        _appSettings.CurrentValue.PayHistoryService.Db.OrderedOperationsTableName,
                         c.Resolve<ILogFactory>())))
                 .As<IHistoryOperationRepository>()
+                .SingleInstance();
+
+            builder.Register(c =>
+                    new MigrationToNewIndexes(
+                        AzureTableStorage<OldHistoryOperationEntity>.Create(
+                            _appSettings.ConnectionString(x => x.PayHistoryService.Db.DataConnString),
+                            _appSettings.CurrentValue.PayHistoryService.Db.OperationsTableName,
+                            c.Resolve<ILogFactory>()),
+                        c.Resolve<IHistoryOperationRepository>(),
+                        c.Resolve<ILogFactory>()))
+                .As<IStartable>()
+                .AutoActivate()
                 .SingleInstance();
 
             builder.RegisterType<HistoryOperationService>()

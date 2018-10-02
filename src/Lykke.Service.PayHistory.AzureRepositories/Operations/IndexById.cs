@@ -13,7 +13,6 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
             }
 
             return id;
-
         }
 
         internal static string GenerateRowKey()
