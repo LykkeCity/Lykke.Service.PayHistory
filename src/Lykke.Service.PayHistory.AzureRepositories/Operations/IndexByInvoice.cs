@@ -15,19 +15,15 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
             return invoiceId;
         }
 
-        internal static string GenerateRowKey(string id)
+        internal static string GenerateRowKey(DateTime createdOn, string id)
         {
-            if (string.IsNullOrEmpty(id))
-            {
-                throw new ArgumentNullException(id);
-            }
-
-            return id;
+            return $"{(DateTime.MaxValue.Ticks - createdOn.Ticks):D19}{id}";
         }
 
         internal static AzureIndex Create(HistoryOperationEntity entity)
         {
-            return AzureIndex.Create(GeneratePartitionKey(entity.InvoiceId), GenerateRowKey(entity.Id), entity);
+            return AzureIndex.Create(GeneratePartitionKey(entity.InvoiceId), 
+                GenerateRowKey(entity.CreatedOn, entity.Id), entity);
         }
     }
 }

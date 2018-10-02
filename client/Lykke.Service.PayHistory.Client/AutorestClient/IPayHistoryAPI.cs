@@ -4,7 +4,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Lykke.Service.PayHistory.AutorestClient
+namespace Lykke.Service.PayHistory.Client.AutorestClient
 {
     using Microsoft.Rest;
     using Models;
@@ -65,6 +65,20 @@ namespace Lykke.Service.PayHistory.AutorestClient
         /// <summary>
         /// Returns details of the history operation.
         /// </summary>
+        /// <param name='id'>
+        /// Identifier of the history operation.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetDetailsByIdWithHttpMessagesAsync(string id = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Returns details of the history operation.
+        /// </summary>
         /// <param name='merchantId'>
         /// Identifier of the merchant.
         /// </param>
@@ -110,9 +124,6 @@ namespace Lykke.Service.PayHistory.AutorestClient
         /// </param>
         Task<HttpOperationResponse<ErrorResponse>> SetRemovedWithHttpMessagesAsync(string id = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
-        /// <summary>
-        /// Checks service is alive
-        /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>

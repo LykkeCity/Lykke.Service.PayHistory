@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Lykke.Service.PayHistory.Client.AutorestClient.Models;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Lykke.Service.PayHistory.AutorestClient.Models;
 
 namespace Lykke.Service.PayHistory.Client.Models
 {

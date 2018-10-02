@@ -1,5 +1,5 @@
-﻿using Lykke.Service.PayHistory.AutorestClient;
-using Lykke.Service.PayHistory.AutorestClient.Models;
+﻿using Lykke.Service.PayHistory.Client.AutorestClient;
+using Lykke.Service.PayHistory.Client.AutorestClient.Models;
 using Lykke.Service.PayHistory.Client.Models;
 using System;
 using System.Collections.Generic;
@@ -90,26 +90,24 @@ namespace Lykke.Service.PayHistory.Client
         /// <summary>
         /// Returns details of the history operation.
         /// </summary>
-        /// <param name="merchantId">Identifier of the merchant.</param>
         /// <param name="id">Identifier of the history operation.</param>
         /// <returns>Details of the history operation.</returns>
-        public HistoryOperationModel GetDetails(string merchantId, string id)
+        public HistoryOperationModel GetDetails(string id)
         {
-            var result = _service.GetDetails(merchantId, id);
+            var result = _service.GetDetailsById(id);
             return Convert<HistoryOperationModel>(result);
         }
 
         /// <summary>
         /// Returns details of the history operation.
         /// </summary>
-        /// <param name="merchantId">Identifier of the merchant.</param>
         /// <param name="id">Identifier of the history operation.</param>
         /// <param name="cancellationToken">A cancellation token that can be used to cancel the work.</param>
         /// <returns>Details of the history operation.</returns>
-        public async Task<HistoryOperationModel> GetDetailsAsync(string merchantId, string id,
+        public async Task<HistoryOperationModel> GetDetailsAsync(string id,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var result = await _service.GetDetailsAsync(merchantId, id, cancellationToken);
+            var result = await _service.GetDetailsByIdAsync(id, cancellationToken);
             return Convert<HistoryOperationModel>(result);
         }
 
