@@ -1,17 +1,19 @@
-﻿using Lykke.AzureStorage.Tables;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Lykke.AzureStorage.Tables;
 using Lykke.AzureStorage.Tables.Entity.Annotation;
 using Lykke.AzureStorage.Tables.Entity.ValueTypesMerging;
 using Lykke.Service.PayHistory.Core.Domain;
-using System;
 
-namespace Lykke.Service.PayHistory.AzureRepositories.Operations
+namespace Lykke.Service.PayHistory.AzureRepositories.Operations.Migration
 {
     [ValueTypeMergingStrategy(ValueTypeMergingStrategy.UpdateIfDirty)]
-    public class HistoryOperationEntity: AzureTableEntity, IHistoryOperation
+    public class OldHistoryOperationEntity : AzureTableEntity, IHistoryOperation
     {
-        public string Id { get; set; }
+        public string Id => RowKey;
 
-        public string MerchantId { get; set; }
+        public string MerchantId => PartitionKey;
 
         private HistoryOperationType _type;
         public HistoryOperationType Type
@@ -99,17 +101,14 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
             }
         }
 
-        public HistoryOperationEntity()
+        public OldHistoryOperationEntity()
         {
         }
 
-        public HistoryOperationEntity(IHistoryOperation historyOperation)
+        public OldHistoryOperationEntity(IHistoryOperation historyOperation)
         {
             PartitionKey = GetPartitionKey(historyOperation.MerchantId);
-            RowKey = GetRowKey(historyOperation.Id, historyOperation.CreatedOn);
-            
-            Id = historyOperation.Id;
-            MerchantId = historyOperation.MerchantId;
+            RowKey = GetRowKey(historyOperation.Id);
             Type = historyOperation.Type;
             OppositeMerchantId = historyOperation.OppositeMerchantId;
             InvoiceId = historyOperation.InvoiceId;
@@ -133,14 +132,14 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
             return merchantId;
         }
 
-        internal static string GetRowKey(string id, DateTime createdOn)
+        internal static string GetRowKey(string id)
         {
             if (string.IsNullOrEmpty(id))
             {
                 throw new ArgumentNullException(id);
             }
 
-            return $"{(DateTime.MaxValue.Ticks - createdOn.Ticks):D19}{id}";
+            return id;
         }
     }
 }

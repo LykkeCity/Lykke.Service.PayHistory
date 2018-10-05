@@ -4,8 +4,9 @@
 // regenerated.
 // </auto-generated>
 
-namespace Lykke.Service.PayHistory.AutorestClient.Models
+namespace Lykke.Service.PayHistory.Client.AutorestClient.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -26,7 +27,7 @@ namespace Lykke.Service.PayHistory.AutorestClient.Models
         /// 'OutgoingInvoicePayment', 'IncomingInvoicePayment',
         /// 'OutgoingExchange', 'IncomingExchange', 'Withdrawal',
         /// 'CashOut'</param>
-        public HistoryOperationModel(HistoryOperationType type, System.DateTime createdOn, double amount, string merchantId = default(string), string employeeEmail = default(string), string txHash = default(string), string id = default(string), string oppositeMerchantId = default(string), string assetId = default(string), string desiredAssetId = default(string), string invoiceId = default(string), string invoiceStatus = default(string))
+        public HistoryOperationModel(string merchantId, string employeeEmail, string txHash, string id, HistoryOperationType type, string oppositeMerchantId, System.DateTime createdOn, double amount, string assetId, string desiredAssetId, string invoiceId, string invoiceStatus)
         {
             MerchantId = merchantId;
             EmployeeEmail = employeeEmail;
@@ -114,11 +115,47 @@ namespace Lykke.Service.PayHistory.AutorestClient.Models
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
+            if (MerchantId == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "MerchantId");
+            }
+            if (EmployeeEmail == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "EmployeeEmail");
+            }
+            if (TxHash == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "TxHash");
+            }
+            if (Id == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "Id");
+            }
+            if (OppositeMerchantId == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "OppositeMerchantId");
+            }
+            if (AssetId == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "AssetId");
+            }
+            if (DesiredAssetId == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "DesiredAssetId");
+            }
+            if (InvoiceId == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "InvoiceId");
+            }
+            if (InvoiceStatus == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "InvoiceStatus");
+            }
         }
     }
 }

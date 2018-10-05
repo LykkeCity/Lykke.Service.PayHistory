@@ -1,10 +1,9 @@
 ﻿using AzureStorage;
-using Lykke.Service.PayHistory.Core.Domain;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AzureStorage.Tables.Templates.Index;
+using Lykke.Service.PayHistory.Core.Domain;
 using Lykke.Service.PayHistory.Core.Exception;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Lykke.Service.PayHistory.AzureRepositories.Operations
 {
@@ -16,7 +15,7 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
 
         public HistoryOperationRepository(
             INoSQLTableStorage<HistoryOperationEntity> storage,
-            INoSQLTableStorage<AzureIndex> indexByInvoice, 
+            INoSQLTableStorage<AzureIndex> indexByInvoice,
             INoSQLTableStorage<AzureIndex> indexById)
         {
             _storage = storage;
@@ -24,26 +23,25 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
             _indexById = indexById;
         }
 
-        public async Task<IEnumerable<IHistoryOperation>> GetAsync(string merchantId)
+        public async Task<IEnumerable<IHistoryOperation>> GetByMerchantOrderedByCreatedOnDescAsync(string merchantId)
         {
-            IEnumerable<HistoryOperationEntity> records =
-                await _storage.GetDataAsync(HistoryOperationEntity.GetPartitionKey(merchantId));
-
-            return records.Where(x => !x.Removed);
+            return await _storage.GetDataAsync(merchantId, o=> !o.Removed);
         }
 
         public async Task<IEnumerable<IHistoryOperation>> GetByInvoiceAsync(string invoiceId)
         {
-            IEnumerable<AzureIndex> indexes =
-                await _indexByInvoice.GetDataAsync(IndexByInvoice.GeneratePartitionKey(invoiceId));
+            IEnumerable<AzureIndex> indexes = await _indexByInvoice.GetDataAsync(
+                IndexByInvoice.GeneratePartitionKey(invoiceId));
 
             return await _storage.GetDataAsync(indexes);
         }
 
-        public async Task<IHistoryOperation> GetAsync(string merchantId, string id)
+        public async Task<IHistoryOperation> GetAsync(string id)
         {
-            return await _storage.GetDataAsync(HistoryOperationEntity.GetPartitionKey(merchantId),
-                HistoryOperationEntity.GetRowKey(id));
+            AzureIndex index =
+                await _indexById.GetDataAsync(IndexById.GeneratePartitionKey(id), IndexById.GenerateRowKey());
+
+            return await _storage.GetDataAsync(index);
         }
 
         public async Task SetTxHashAsync(string id, string txHash)
@@ -70,21 +68,19 @@ namespace Lykke.Service.PayHistory.AzureRepositories.Operations
         {
             var entity = new HistoryOperationEntity(historyOperation);
 
-            AzureIndex indexById = IndexById.Create(entity);
+            var tasks = new List<Task>();
+            tasks.Add(_storage.InsertOrReplaceAsync(entity));
 
-            if (string.IsNullOrEmpty(historyOperation.InvoiceId))
+            AzureIndex indexById = IndexById.Create(entity);
+            tasks.Add(_indexById.InsertOrReplaceAsync(indexById));
+
+            if (!string.IsNullOrEmpty(historyOperation.InvoiceId))
             {
-                return Task.WhenAll(
-                    _storage.InsertOrReplaceAsync(entity),
-                    _indexById.InsertOrReplaceAsync(indexById));
+                AzureIndex indexByInvoice = IndexByInvoice.Create(entity);
+                tasks.Add(_indexByInvoice.InsertOrReplaceAsync(indexByInvoice));
             }
 
-            AzureIndex indexByInvoice = IndexByInvoice.Create(entity);
-
-            return Task.WhenAll(
-                _storage.InsertOrReplaceAsync(entity),
-                _indexById.InsertOrReplaceAsync(indexById),
-                _indexByInvoice.InsertOrReplaceAsync(indexByInvoice));
+            return Task.WhenAll(tasks);
         }
 
         public async Task SetRemovedAsync(string id)

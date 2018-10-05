@@ -72,20 +72,45 @@ namespace Lykke.Service.PayHistory.Controllers
         /// <summary>
         /// Returns details of the history operation.
         /// </summary>
+        /// <param name="id">Identifier of the history operation.</param>
+        /// <returns code="200">Details of the history operation.</returns>
+        /// <returns code="400">Input arguments are invalid.</returns>
+        [HttpGet]
+        [SwaggerOperation("GetDetailsById")]
+        [ProducesResponseType(typeof(HistoryOperationModel), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> GetDetailsById(
+            [Required, PartitionOrRowKey]string id)
+        {
+            var result = await _historyOperationService.GetDetailsAsync(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            var model = _mapper.Map<HistoryOperationModel>(result);
+            return Ok(model);
+        }
+
+        /// <summary>
+        /// Returns details of the history operation.
+        /// </summary>
         /// <param name="merchantId">Identifier of the merchant.</param>
         /// <param name="id">Identifier of the history operation.</param>
         /// <returns code="200">Details of the history operation.</returns>
         /// <returns code="400">Input arguments are invalid.</returns>
         [HttpGet]
+        [Obsolete]
         [SwaggerOperation("GetDetails")]
         [ProducesResponseType(typeof(HistoryOperationModel), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetDetails(
-            [Required, PartitionOrRowKey]string merchantId, 
+            string merchantId, 
             [Required, PartitionOrRowKey]string id)
         {
-            var result = await _historyOperationService.GetDetailsAsync(merchantId, id);
+            var result = await _historyOperationService.GetDetailsAsync(id);
             if (result == null)
             {
                 return NotFound();

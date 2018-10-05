@@ -4,7 +4,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Lykke.Service.PayHistory.AutorestClient
+namespace Lykke.Service.PayHistory.Client.AutorestClient
 {
     using Models;
     using System.Threading;
@@ -89,12 +89,47 @@ namespace Lykke.Service.PayHistory.AutorestClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            /// <param name='id'>
+            /// Identifier of the history operation.
+            /// </param>
+            public static object GetDetailsById(this IPayHistoryAPI operations, string id = default(string))
+            {
+                return operations.GetDetailsByIdAsync(id).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Returns details of the history operation.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='id'>
+            /// Identifier of the history operation.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetDetailsByIdAsync(this IPayHistoryAPI operations, string id = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetDetailsByIdWithHttpMessagesAsync(id, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Returns details of the history operation.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
             /// <param name='merchantId'>
             /// Identifier of the merchant.
             /// </param>
             /// <param name='id'>
             /// Identifier of the history operation.
             /// </param>
+            [System.Obsolete()]
             public static object GetDetails(this IPayHistoryAPI operations, string merchantId = default(string), string id = default(string))
             {
                 return operations.GetDetailsAsync(merchantId, id).GetAwaiter().GetResult();
@@ -115,6 +150,7 @@ namespace Lykke.Service.PayHistory.AutorestClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
+            [System.Obsolete()]
             public static async Task<object> GetDetailsAsync(this IPayHistoryAPI operations, string merchantId = default(string), string id = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetDetailsWithHttpMessagesAsync(merchantId, id, null, cancellationToken).ConfigureAwait(false))
@@ -197,9 +233,6 @@ namespace Lykke.Service.PayHistory.AutorestClient
                 }
             }
 
-            /// <summary>
-            /// Checks service is alive
-            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -208,9 +241,6 @@ namespace Lykke.Service.PayHistory.AutorestClient
                 return operations.IsAliveAsync().GetAwaiter().GetResult();
             }
 
-            /// <summary>
-            /// Checks service is alive
-            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>

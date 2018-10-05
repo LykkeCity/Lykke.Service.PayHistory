@@ -1,5 +1,5 @@
-﻿using System;
-using Lykke.Service.PayHistory.AutorestClient.Models;
+﻿using Lykke.Service.PayHistory.Client.AutorestClient.Models;
+using System;
 
 namespace Lykke.Service.PayHistory.Client.Publisher
 {
